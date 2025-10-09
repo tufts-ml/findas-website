@@ -1,0 +1,2419 @@
+/* ---------- Palette & base ---------- */
+:root{
+  --brand-blue:   #2F6FB0; /* Tufts-like blue */
+  --brand-brown:  #6B4F3F; /* Tufts-like brown */
+  --light-gray:   #F5F7FA;
+  --text:         #0a0a0a;
+  --border:       #e5e7eb;
+
+  --blue-solid:   #2F6FB0;
+  --blue-solid-h: #2a61a0; /* hover darker */
+
+  --modal-blue:   #EAF3FB; /* very light blue for modal panel */
+  --muted-blue:   #415a77; /* body text on modal */
+  --muted:        #667085; /* general muted text */
+}
+
+*{ box-sizing: border-box }
+html,body{ height:100% }
+body{
+  margin:0;
+  color:var(--text);
+  font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+  background: linear-gradient(to bottom, #fff, var(--light-gray));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img{ max-width:100%; display:block }
+
+/* ==== Global site background (applies to every page) ==== */
+body{ position:relative; z-index:0; }
+
+body::before{
+  content:"";
+  position:fixed;            /* sticks to viewport, not sections */
+  inset:-40vh -40vw;         /* big bleed so it never ends */
+  z-index:-1;
+  pointer-events:none;
+
+  /* Three blobs + a soft base fade */
+  background:
+    radial-gradient(42rem 42rem at -8% -12%,
+      color-mix(in oklab, var(--brand-blue) 40%, transparent) 0%,
+      transparent 65%),
+    radial-gradient(38rem 38rem at 110% -6%,
+      color-mix(in oklab, var(--brand-brown) 28%, transparent) 0%,
+      transparent 68%),
+    radial-gradient(50rem 44rem at 85% 120%,
+      color-mix(in oklab, var(--brand-blue) 22%, transparent) 0%,
+      transparent 72%),
+    linear-gradient(to bottom, #fff 0%, var(--light-gray) 100%);
+
+  filter: blur(42px) saturate(1.02);  /* the “blurred blob” look */
+  opacity:.95;
+}
+
+
+/* ---------- Utilities ---------- */
+.container{ max-width: 1200px; margin-inline:auto; padding: 0 20px }
+.border-b{ border-bottom:1px solid var(--border) }
+.border-t{ border-top:1px solid var(--border) }
+.text-on-blue{ color: #fff }
+.text-on-blue-soft{ color: #e8f0fb }
+
+.h1{ font-size: clamp(2.25rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.02em; margin: .25rem 0 }
+.h2{ font-size: 1.75rem; font-weight: 800; margin: 0 }
+.h3{ font-size: 1.125rem; font-weight: 700; margin: 0 }
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.68rem 1.1rem; border-radius:.9rem; font-weight:800; font-size:.95rem;
+  border:1px solid transparent; cursor:pointer;
+  transform: translateZ(0);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+}
+.btn-primary{
+  color:#fff; background: var(--brand-blue); box-shadow: 0 10px 26px rgba(47,111,176,.32);
+}
+.btn-primary:hover{
+  transform: translateY(-2px) scale(1.035);
+  box-shadow: 0 18px 38px rgba(47,111,176,.42);
+}
+.btn-primary:active{
+  transform: translateY(0) scale(0.99);
+}
+.btn-ghost{
+  background:#fff; color:#111827; border-color:#d1d5db; box-shadow:0 8px 22px rgba(0,0,0,.08);
+}
+.btn-ghost:hover{
+  transform: translateY(-2px) scale(1.03);
+  box-shadow:0 16px 30px rgba(0,0,0,.12);
+  background:#fafafa;
+}
+.btn-ghost-anim{ position:relative; overflow:hidden }
+.btn-ghost-anim::after{
+  content:""; position:absolute; inset:0; background: radial-gradient(120px 60px at var(--mx,50%) var(--my,50%), rgba(47,111,176,.12), transparent 60%);
+  transition: opacity .18s; opacity:0;
+}
+.btn-ghost-anim:hover::after{ opacity:1 }
+
+.pill{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.25rem .65rem; border-radius:999px; font-size:.72rem; font-weight:700;
+  background:#fff; border:1px solid var(--border); color:#475569
+}
+
+/* ---------- Nav ---------- */
+.nav{ position: sticky; top:0; z-index:40 }
+.glass{
+  background: color-mix(in srgb, #fff 72%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.nav.scrolled{ box-shadow: 0 1px 8px rgba(0,0,0,.08) }
+.nav__inner{
+  display:flex; align-items:center; justify-content:space-between; padding: .75rem 0;
+}
+.nav__brand{ display:flex; align-items:center; gap:.75rem; text-decoration:none; color:inherit }
+
+.nav__logo{
+  width:32px;
+  height:32px;
+  display:block;
+  border-radius:.4rem;        /* keep the same rounded look; remove if you want sharp */
+  object-fit:contain;         /* never stretch your icon */
+  object-position:center;
+  box-shadow:none;            /* kill the old inset shine */
+  background:none;            /* kill the gradient background */
+}
+
+/* optional: subtle hover lift on the whole brand area */
+.nav__brand:hover .nav__logo{ transform: translateY(-1px); transition: transform .18s ease }
+
+.brand-title{ font-weight: 800; font-size:.95rem; letter-spacing:.01em }
+.brand-subtitle{ font-size:.68rem; color:#64748b; letter-spacing:.04em }
+.nav__links{ display:none; gap:.25rem; list-style:none; margin:0; padding:0 }
+.link-btn{
+  padding:.45rem .8rem; border-radius:.75rem; font-size:.9rem; font-weight:700;
+  border:1px solid transparent; background:transparent; color:#374151; cursor:pointer;
+  transition: background .18s, color .18s, transform .18s;
+}
+.link-btn:hover{ background:#eef2ff; color: var(--brand-brown); transform: translateY(-1px) }
+@media (min-width:640px){ .nav__links{ display:flex } }
+
+/* ---------- Hero ---------- */
+.hero{ position:relative; overflow:hidden }
+.blob{
+  position:absolute; width:16rem; height:16rem; filter: blur(36px); border-radius:999px; pointer-events:none;
+}
+.blob--blue{ left:-10%; top:-20%; background: color-mix(in oklab, var(--brand-blue) 40%, transparent) }
+.blob--brown{ right:-8%; top:-10%; background: color-mix(in oklab, var(--brand-brown) 30%, transparent) }
+
+.hero__grid{
+  display:grid; grid-template-columns:1fr; gap: 2.5rem; padding: 4rem 0;
+}
+@media (min-width:1024px){ .hero__grid{ grid-template-columns:1fr 1fr; padding: 6rem 0 } }
+.lead{ font-size:1.05rem; color:#374151; max-width: 42ch; margin: .5rem 0 0 }
+.hero__cta{ margin-top: 1rem; display:flex; flex-wrap:wrap; gap:.75rem }
+.hero__image{ position:relative }
+.hero__frame{
+  aspect-ratio: 4/3; border-radius: 1.25rem; overflow:hidden; border:1px solid var(--border);
+  box-shadow: 0 1px 2px rgba(0,0,0,.06);
+}
+.hero__frame img{ width:100%; height:100%; object-fit:cover }
+.hero__fade{
+  position:absolute; inset: auto -1.5rem -1.5rem; height: 6rem;
+  background: linear-gradient(to top, #fff, transparent);
+  pointer-events:none;
+}
+
+/* ---------- Sections ---------- */
+.section{ padding: 4rem 0 }
+.section__heading{ margin-bottom: 1.5rem }
+.section__heading .muted{ margin-top:.35rem; max-width:60ch }
+
+/* ---------- Grid ---------- */
+.grid{
+  display:grid; gap:1rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width:640px){ .grid{ grid-template-columns: repeat(2, minmax(0,1fr)) } }
+@media (min-width:1024px){ .grid{ grid-template-columns: repeat(3, minmax(0,1fr)) } }
+
+/* ---------- Solid blue cards + tilt ---------- */
+.card-frame{
+  padding:1px; border-radius:1.1rem; transition: transform .2s ease, filter .2s ease; will-change: transform;
+}
+.card-frame:hover{ transform: translateY(-6px) }
+.card{
+  display:flex; flex-direction:column; height:100%;
+  overflow:hidden; border-radius: calc(1.1rem - 1px);
+  box-shadow: 0 1px 2px rgba(0,0,0,.06);
+}
+.card--blue-inner{
+  background: var(--blue-solid);
+  border: 1px solid rgba(255,255,255,.18);
+}
+.card--blue-inner:hover{ background: var(--blue-solid-h) }
+
+.card__body{ padding:1.1rem 1.1rem .9rem 1.1rem }
+.card__body--blue .text-on-blue-soft{ margin-top:.35rem }
+
+.card__media{ position:relative; margin-top:auto }
+.card__media--blue img{
+  width:100%; height:13.5rem; object-fit:contain; /* good for transparent PNGs */
+  transform: translateZ(0);
+  transition: transform .5s cubic-bezier(.22,1,.36,1);
+}
+.card-frame:hover .card__media--blue img{ transform: scale(1.05) }
+
+/* Tilt – set via JS */
+.tilt{ transform: perspective(800px) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) }
+
+/* ---------- Footer ---------- */
+.footer{ padding: 2.5rem 0; padding-top: 5rem;}
+.footer__title{
+  font-size:.95rem; font-weight:700; margin-bottom:.9rem;
+  color: var(--brand-brown);
+}
+.logo-tile{
+  display:flex; align-items:center; justify-content:center; height:3.25rem;
+  background:#fff; border:1px solid var(--border); border-radius:.85rem; box-shadow:0 1px 2px rgba(0,0,0,.06);
+}
+.logo-tile img{ max-height: 2.25rem; object-fit:contain }
+.footer__copy{ margin-top: .9rem; font-size:.75rem; color:#6b7280 }
+
+/* ---------- Modal (very light blue, nearly full-screen, FLIP) ---------- */
+.modal{ position:fixed; inset:0; z-index:50; display:none; place-items:center }
+.modal.open{ display:grid }
+.modal__backdrop{
+  position:absolute; inset:0; background: rgba(0,0,0,.5); backdrop-filter: blur(6px);
+  opacity:0; transition: opacity .28s ease-out;
+}
+.modal.open .modal__backdrop{ opacity:1 }
+.modal.closing .modal__backdrop{ opacity:0 }
+
+.modal__panel{
+  position:relative; z-index:1; width:min(98vw, 1200px); max-height:92vh; overflow:auto;
+  background: var(--modal-blue); border:1px solid #dbe7f3; border-radius:1.1rem;
+  box-shadow: 0 24px 64px rgba(0,0,0,.22); padding:1.2rem;
+  transform-origin: 50% 50%;
+  --tx: 0px; --ty: 0px; --s: .92;
+  animation: modal-in-zoom .34s cubic-bezier(.2,.8,.2,1) both;
+}
+.modal.closing .modal__panel{ animation: modal-out-zoom .26s cubic-bezier(.2,.8,.2,1) both }
+
+@keyframes modal-in-zoom{
+  0%   { transform: translate(var(--tx), var(--ty)) scale(var(--s)); opacity:0 }
+  100% { transform: translate(0,0) scale(1); opacity:1 }
+}
+@keyframes modal-out-zoom{
+  0%   { transform: translate(0,0) scale(1); opacity:1 }
+  100% { transform: translate(var(--tx), var(--ty)) scale(var(--s)); opacity:0 }
+}
+
+/* White X (no border) */
+.x-btn{
+  position:absolute; top:.6rem; right:.8rem;
+  font-size: 28px; line-height: 1; color:#fff; background:transparent; border:0; cursor:pointer;
+  text-shadow: 0 1px 2px rgba(0,0,0,.25);
+}
+.x-btn:hover{ transform: scale(1.05) }
+
+/* Modal content layout */
+.modal-title{ color: #1d3557 }
+.modal__head{ padding: .25rem .25rem .5rem .25rem }
+.modal__content{
+  display:grid; gap: 1rem; grid-template-columns: 1fr; align-items: start;
+}
+@media (min-width: 900px){
+  .modal__content{ grid-template-columns: 1.25fr .9fr }
+}
+.modal__figure{
+  order: 2;
+}
+@media (min-width: 900px){
+  .modal__figure{ order: 2 } /* on wide screens, image sits right */
+}
+.modal__figure img{
+  width:100%; height:auto; object-fit:contain; border-radius:.8rem; background:#fff;
+  border:1px solid #dbe7f3;
+}
+.caption{
+  font-size:.8rem; color:#53718f; margin-top:.35rem; text-align:center;
+}
+.modal__text{
+  order: 1; color: var(--muted-blue);
+}
+.intro{ margin: .35rem 0 1rem 0 }
+.subhead{
+  margin: 1rem 0 .35rem 0; color:#274c77; font-size:1rem; font-weight:800; letter-spacing:.01em
+}
+.bullets{
+  padding-left: 1.1rem; margin: .25rem 0 .75rem 0;
+}
+.bullets li{
+  margin:.25rem 0; padding-left:.25rem;
+}
+.bullets li::marker{ color: var(--brand-brown) }
+
+/* ---------- Animations ---------- */
+@keyframes float{ 0%,100%{transform: translateY(0)} 50%{transform: translateY(-6px)} }
+@keyframes reveal{ 0%{transform: translateY(8px); opacity:0} 100%{transform: translateY(0); opacity:1} }
+.animate-float{ animation: float 6s ease-in-out infinite }
+.animate-reveal{ animation: reveal .36s ease-out both }
+.delay-1-2s{ animation-delay: 1.2s }
+.delay-012s{ animation-delay: .12s }
+
+/* ---------- Reduce motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  .animate-float, .animate-reveal { animation: none }
+  .modal__panel { animation: none }
+}
+.card-frame { cursor: pointer; }
+
+/* Small panel size for contact modal */
+.modal__panel--sm { width: min(95vw, 560px); }
+
+/* Simple form layout */
+.form { display: grid; gap: .9rem; }
+.form .row { display: grid; gap: .9rem; grid-template-columns: 1fr; }
+@media (min-width: 640px){ .form .row { grid-template-columns: 1fr 1fr; } }
+
+.field { display: grid; gap: .35rem; }
+.field label { font-weight: 700; font-size: .9rem; color: #274c77; }
+.field input, .field textarea {
+  width: 100%; padding: .7rem .8rem; border-radius: .65rem;
+  border: 1px solid #dbe7f3; background: #fff; font-size: .95rem;
+}
+.field input:focus, .field textarea:focus {
+  outline: none; border-color: var(--brand-blue); box-shadow: 0 0 0 3px rgba(47,111,176,.15);
+}
+
+.actions { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+.status { font-size: .9rem; color: var(--muted-blue); }
+.status.ok { color: #146c43; }     /* green-ish */
+.status.err { color: #b42318; }    /* red-ish */
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,1,1); border: 0; }
+.hp { position: absolute; left: -9999px; } /* honeypot hidden */
+
+/* ---------- Plain card (white) ---------- */
+.card--plain{
+  background:#fff; border:1px solid var(--border);
+  border-radius:1.1rem; box-shadow:0 1px 2px rgba(0,0,0,.06);
+}
+.card--plain .card__body{ padding:1.1rem }
+
+.blog-section{
+  padding-bottom: 80px;
+}
+
+/* ---------- Table styles ---------- */
+.table-wrap{ overflow:auto }
+.table{
+  width:100%; border-collapse:separate; border-spacing:0; background:#fff;
+  border:1px solid var(--border); border-radius:.8rem; overflow:hidden;
+}
+.table thead th{
+  background: var(--brand-blue); color:#fff; font-weight:800; padding:.75rem .9rem;
+}
+.table tbody td{
+  padding:.7rem .9rem; border-top:1px solid var(--border);
+}
+.table tbody tr:nth-child(even) td{ background:#f5f7fa }
+.table tbody tr:first-child td{ border-top:1px solid var(--border) }
+
+/* ---------- Blog list grid ---------- */
+.blog-list{ display:grid; gap:1rem }
+
+/* Make .link-btn look identical on <a> and <button> */
+.link-btn{
+display:inline-flex; align-items:center; justify-content:center;
+text-decoration:none; /* kill underline on <a> */
+-webkit-appearance:none; appearance:none;
+}
+.link-btn:link, .link-btn:visited{ text-decoration:none; color:inherit }
+
+/* Brand link shouldn't underline either */
+.nav__brand{ text-decoration:none; color:inherit; cursor:pointer }
+.nav__brand:focus-visible{ outline:2px solid color-mix(in srgb, var(--brand-blue) 60%, #000); outline-offset:3px }
+
+
+/* Publications chips + callout */
+.chip-row{ display:flex; flex-wrap:wrap; gap:.5rem; margin:.35rem 0 .25rem }
+.chip{
+display:inline-flex; align-items:center; gap:.25rem;
+font-weight:800; font-size:.8rem;
+padding:.38rem .6rem; border-radius:.6rem;
+border:1px solid #dbe7f3; background:#fff; color:#274c77; text-decoration:none;
+transition: transform .18s ease, background .18s ease, border-color .18s ease;
+}
+.chip:hover{ transform: translateY(-1px); background:#eef6ff; border-color:#cfe4ff }
+.chip--ghost{ background:#f8fbff }
+
+.pub-callout{
+margin-top:.6rem; padding:.7rem .8rem; background:#f8fbff;
+border:1px solid #dbe7f3; border-radius:.6rem; overflow:auto;
+}
+.pub-callout pre{ margin:0; font-size:.85rem }
+.title-link{ color:inherit; text-decoration:none }
+.title-link:hover{ text-decoration:underline }
+
+/* ----- Team accordion ----- */
+.team-accordion{ display:grid; gap:.7rem }
+
+.person{
+border:1px solid var(--border);
+border-radius:.85rem;
+background:#fff;
+box-shadow:0 1px 2px rgba(0,0,0,.06);
+overflow:hidden;
+}
+.person summary{
+list-style:none;
+display:flex; align-items:center; justify-content:space-between; gap:.75rem;
+padding:.85rem 1rem; cursor:pointer; user-select:none;
+}
+.person summary::-webkit-details-marker{ display:none }
+.person__name{ font-weight:800; letter-spacing:.01em }
+.person__role{ color:#64748b; font-weight:700; font-size:.92rem }
+
+/* chevron */
+.person summary::after{
+content:"▾"; font-size:1rem; line-height:1;
+color:#274c77; transition: transform .18s ease;
+}
+.person[open] summary::after{ transform: rotate(180deg) }
+
+/* panel */
+.person__panel{
+border-top:1px solid var(--border);
+padding:.85rem 1rem;
+color:var(--muted-blue);
+}
+.person__blurb{ margin:.25rem 0 .6rem }
+
+/* optional contact chips (omit the list entirely if no contacts) */
+.person__contacts{ display:flex; gap:.5rem; flex-wrap:wrap; list-style:none; padding:0; margin:0 }
+.contact-chip{
+display:inline-flex; align-items:center;
+font-weight:800; font-size:.8rem;
+padding:.38rem .6rem; border-radius:.6rem;
+border:1px solid #dbe7f3; background:#f8fbff; color:#274c77; text-decoration:none;
+transition: transform .18s ease, background .18s ease, border-color .18s ease;
+}
+.contact-chip:hover{ transform: translateY(-1px); background:#eef6ff; border-color:#cfe4ff }
+
+
+/* ================= Team accordion polish ================= */
+
+/* Tweakable column width for the Role column (keeps roles aligned) */
+:root { --role-col-width: 220px; }
+@media (max-width: 520px){
+:root { --role-col-width: 170px; } /* give phones a bit more room */
+}
+
+/* Card hover (subtle lift + border tint) */
+.team-accordion .person{
+transition: box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+.team-accordion .person:hover{
+box-shadow: 0 6px 18px rgba(47,111,176,.12);
+border-color: #cfe4ff;
+}
+
+/* Summary row layout: Name | Role | Chevron */
+.team-accordion .person summary{
+/* replace previous flex with grid for perfect column alignment */
+display: grid;
+grid-template-columns: 1fr minmax(120px, var(--role-col-width)) 2.25rem; /* icon col fixed */
+align-items: center;
+gap: .75rem;
+padding: .95rem 1rem;
+border-radius: .85rem;   /* keeps hit area comfy */
+transition: background .18s ease, color .18s ease;
+}
+
+/* Hover row highlight (when closed) */
+.team-accordion .person:not([open]) summary:hover{
+background: #f2f7ff; /* soft blue */
+}
+
+/* Name + Role text */
+.team-accordion .person .person__name{
+font-weight: 800; letter-spacing: .01em;
+}
+.team-accordion .person .person__role{
+justify-self: center;          /* center inside its column */
+text-align: center;             /* center the text itself */
+font-weight: 700;
+color: #64748b;
+white-space: nowrap;            /* keep single line on wide screens */
+}
+@media (max-width: 520px){
+.team-accordion .person .person__role{ white-space: normal; } /* allow wrap on phones */
+}
+
+/* Larger chevron “button” on right */
+.team-accordion .person summary::after{
+content: "▾";
+display: grid; place-items: center;
+width: 2.25rem; height: 2.25rem;     /* bigger hit target (summary is clickable) */
+border-radius: .5rem;
+font-size: 1.35rem;
+line-height: 1;
+color: #274c77;
+transition: transform .18s ease, background .18s ease, color .18s ease;
+}
+.team-accordion .person:not([open]) summary:hover::after{
+background: #eaf3fb;
+}
+
+/* Open state: brand-blue banner with white text */
+.team-accordion .person[open] summary{
+background: var(--blue-solid);
+color: #fff;
+border-bottom-left-radius: 0;   /* blends into the panel below */
+border-bottom-right-radius: 0;
+}
+.team-accordion .person[open] .person__role{ color: #e8f0fb; }
+.team-accordion .person[open] summary::after{
+transform: rotate(180deg);
+color: #fff;
+background: color-mix(in srgb, var(--brand-blue) 18%, #1d3557);
+}
+
+/* Panel background & divider */
+.team-accordion .person__panel{
+background: #f8fbff;                  /* very light blue */
+border-top: 1px solid #dbe7f3;
+padding: .85rem 1rem 1rem;
+}
+
+
+
+/* Footer CTA button */
+.footer__cta{
+display:flex; justify-content:center; margin-bottom:.9rem; padding-bottom: 2rem;
+}
+.btn-nih{
+background: var(--brand-blue);
+color:#fff;
+border:1px solid color-mix(in srgb, var(--brand-blue) 70%, #ffffff);
+box-shadow: 0 10px 26px rgba(47,111,176,.22);
+padding:.58rem .95rem;           /* slightly smaller than hero buttons */
+border-radius:.85rem;
+font-weight:800; font-size:.95rem;
+text-decoration:none;
+display:inline-flex; align-items:center; gap:.45rem;
+transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+}
+.btn-nih:hover{
+transform: translateY(-2px) scale(1.02);
+background: var(--blue-solid-h);
+border-color: color-mix(in srgb, var(--brand-blue) 85%, #ffffff);
+box-shadow: 0 16px 38px rgba(47,111,176,.30);
+}
+.btn-nih:active{ transform: translateY(0) scale(.99) }
+.btn-nih:focus-visible{
+outline: 3px solid color-mix(in srgb, var(--brand-blue) 25%, #ffffff);
+outline-offset: 2px;
+}
+.btn-nih .grant{ font-weight:900 }
+.btn-nih .ext{
+width:1rem; height:1rem; opacity:.9; flex:0 0 auto;
+fill: currentColor;
+}
+
+/* ===== Aims — large, borderless, non-modal feature blocks ===== */
+.aims{
+display:grid; gap:1.2rem;
+}
+@media (min-width: 900px){
+.aims{ grid-template-columns: 1fr; gap:1.25rem; }
+}
+
+/* Big cards: brand-blue surface with soft gradient, no border */
+.aim{
+display:grid; gap:1rem;
+grid-template-columns: 1fr;          /* stack on mobile */
+background:
+  linear-gradient(180deg, color-mix(in srgb, var(--brand-blue) 92%, #1d3350) 0%, var(--blue-solid) 100%);
+color:#fff;
+border-radius: 1.2rem;
+box-shadow: 0 16px 34px rgba(47,111,176,.22);
+padding: clamp(1rem, 2vw, 1.25rem);
+overflow:hidden;
+transform: translateZ(0);
+}
+.aim:hover{ box-shadow: 0 20px 42px rgba(47,111,176,.28) }
+
+@media (min-width: 900px){
+.aim{
+  grid-template-columns: 1.1fr 1fr;  /* copy | image */
+  align-items: center;
+}
+.aim--flip{ grid-template-columns: 1fr 1.1fr; }
+.aim--flip .aim__text{ order:2 }
+.aim--flip .aim__art{ order:1 }
+}
+
+.aim__text{
+padding: .4rem .25rem .6rem .25rem;
+}
+.aim__title{
+font-size: clamp(1.4rem, 1.8vw, 1.75rem);
+font-weight: 900; letter-spacing: .005em; margin: 0 0 .35rem 0;
+}
+.aim__lead{ color:#e8f0fb; margin:.15rem 0 .5rem 0; font-weight:700 }
+.aim__desc{ color: #edf3ff; opacity:.95; margin:0 }
+
+/* Media: make mismatched images feel on-brand */
+.aim__art{
+position:relative; border-radius: 1rem; overflow:hidden; isolation:isolate;
+min-height: 260px;                    /* large presence */
+}
+@media (min-width: 900px){ .aim__art{ min-height: 320px } }
+
+/* The image fills the frame; we apply tint via overlay below */
+.aim__art img{
+width:100%; height:100%;
+object-fit: cover; object-position: center;
+display:block;
+filter: saturate(.9) contrast(.98) brightness(1.02);
+}
+
+/* Brand tint & soft vignette to harmonize clashing colors */
+.aim__art::after{
+content:""; position:absolute; inset:0;
+background:
+  radial-gradient(120% 90% at 90% 0%, rgba(47,111,176,.22), transparent 60%),
+  linear-gradient(135deg, rgba(47,111,176,.24), rgba(107,79,63,.10));
+mix-blend-mode: multiply;       /* tint image without killing detail */
+pointer-events:none;
+}
+
+/* Subtle white gloss + edge fade for polish */
+.aim__art::before{
+content:""; position:absolute; inset:0;
+background:
+  linear-gradient(to bottom, rgba(255,255,255,.18), transparent 30%),
+  radial-gradient(100% 100% at 0% 100%, rgba(255,255,255,.10), transparent 60%);
+pointer-events:none;
+}
+
+/* Remove any old blue 'card' borders if still present anywhere */
+.card--blue-inner{ border: none !important }
+.card-frame{ padding: 0 !important; border: 0 !important; }
+.card__media--blue img{ height:auto } /* legacy safeguard */
+
+/* Make the aims section breathe a bit more */
+
+/* ===== Aims: 3-up, borderless, expand-on-hover with caption ===== */
+
+/* Let the aims section breathe wider than default container */
+
+/* Row of three flexible cards */
+.aims-row{
+display:flex; gap:1rem; align-items:stretch;
+}
+
+/* Base card */
+.aim-card{
+position:relative;
+flex: 1 1 0;          /* 3 equal columns by default */
+min-height: clamp(240px, 28vw, 440px);
+border-radius: 1.1rem;
+overflow:hidden;
+background: linear-gradient(180deg, color-mix(in srgb, var(--brand-blue) 92%, #1d3557) 0%, var(--blue-solid) 100%);
+box-shadow: 0 10px 26px rgba(47,111,176,.18);
+transition:
+  flex .26s cubic-bezier(.22,1,.36,1),
+  transform .26s cubic-bezier(.22,1,.36,1),
+  box-shadow .26s ease;
+}
+.aim-card:hover{ box-shadow: 0 18px 38px rgba(47,111,176,.28); }
+
+/* Expand hovered; gently shrink others */
+.aims-row:hover .aim-card{ flex: .95; transform: scale(.985); }
+.aims-row:hover .aim-card:hover{
+flex: 1.35;
+transform: scale(1.015);
+z-index: 1;
+}
+
+/* Image fills card */
+.aim-card__art,
+.aim-card__art img{
+position:absolute; inset:0;
+width:100%; height:100%;
+}
+.aim-card__art img{
+object-fit: cover; object-position: center;
+filter: saturate(.9) contrast(.98) brightness(1.02);
+}
+
+/* Brand tint & soft vignette to harmonize clashing colors */
+.aim-card__art::after{
+content:""; position:absolute; inset:0; pointer-events:none;
+background:
+  radial-gradient(120% 90% at 90% 0%, rgba(47,111,176,.20), transparent 60%),
+  linear-gradient(135deg, rgba(47,111,176,.24), rgba(107,79,63,.10));
+mix-blend-mode: multiply;
+}
+.aim-card__art::before{
+content:""; position:absolute; inset:0; pointer-events:none;
+background:
+  linear-gradient(to bottom, rgba(255,255,255,.16), transparent 30%),
+  radial-gradient(100% 80% at 0% 100%, rgba(255,255,255,.10), transparent 60%);
+}
+
+/* Caption bar: readable on any image */
+.aim-card__caption{
+position:absolute; left:.9rem; right:.9rem; bottom:.9rem;
+z-index:1;
+color:#fff; font-weight:800; line-height:1.3;
+background:
+  linear-gradient(180deg, rgba(15,30,50,.18), rgba(15,30,50,.18)),
+  color-mix(in srgb, var(--brand-blue) 22%, rgba(0,0,0,.34));
+border: 1px solid rgba(255,255,255,.22);
+backdrop-filter: blur(5px);
+padding:.55rem .7rem;
+border-radius:.7rem;
+box-shadow: 0 6px 18px rgba(0,0,0,.22);
+}
+
+/* Mobile: stack neatly */
+@media (max-width: 860px){
+.aims-row{ flex-direction:column; }
+.aims-row:hover .aim-card{ flex: 1; transform:none; }
+.aim-card{ min-height: clamp(220px, 42vw, 360px); }
+}
+
+/* Kill any old card borders if present */
+.card--blue-inner, .card-frame{ border:0 !important; padding:0 !important; }
+
+/* ===== Aims: make it wider, slower, bigger, with image-as-background feel ===== */
+
+/* Let aims breathe wider than the normal site container */
+
+/* 3-up row that fills most of the viewport width */
+.aims-row{
+display:flex; align-items:stretch;
+gap: clamp(.6rem, 1.2vw, 1.1rem);
+}
+
+/* Base card */
+.aim-card{
+position:relative;
+flex: 1 1 0;                         /* equal thirds by default */
+min-height: clamp(260px, 28vw, 480px);
+border-radius: 1.1rem;
+overflow:hidden;
+background: var(--blue-solid);       /* fallback if no image */
+box-shadow: 0 10px 26px rgba(47,111,176,.18);
+will-change: flex, transform;
+transition:
+  flex .9s cubic-bezier(.22,1,.36,1),     /* slower expansion */
+  transform .9s cubic-bezier(.22,1,.36,1),
+  box-shadow .4s ease;
+}
+.aim-card:hover{ box-shadow: 0 18px 38px rgba(47,111,176,.28); }
+
+/* On hover: hovered grows more, others shrink more, and it's slower */
+.aims-row:hover .aim-card{
+flex: .88;                            /* shrink others a bit more */
+transform: scale(.985);
+}
+.aims-row:hover .aim-card:hover{
+flex: 1.6;                            /* expand a bit more */
+transform: scale(1.02);
+z-index: 1;
+}
+
+/* Image behaves like a background covering the whole card */
+.aim-card__art,
+.aim-card__art img{
+position:absolute; inset:0;
+width:100%; height:100%;
+}
+.aim-card__art img{
+object-fit: cover; object-position: 50% 50%;
+display:block;
+/* Start a touch zoomed to feel like a background crop */
+transform: scale(1.08) translateY(0%);
+transition: transform .9s cubic-bezier(.22,1,.36,1), filter .9s;
+filter: saturate(.92) contrast(.98) brightness(1.02);
+}
+
+/* When another card is hovered (non-hovered ones crop a bit more) */
+.aims-row:hover .aim-card:not(:hover) .aim-card__art img{
+transform: scale(1.12) translateY(2%);   /* gentle crop at middle */
+}
+
+/* Hovered card reveals more (bigger zoom + slight pan up) */
+.aims-row:hover .aim-card:hover .aim-card__art img{
+transform: scale(1.28) translateY(-3%);
+}
+
+/* Brand tint + vignette to harmonize clashing images */
+.aim-card__art::after{
+content:""; position:absolute; inset:0; pointer-events:none;
+background:
+  radial-gradient(120% 90% at 90% 0%, rgba(47,111,176,.20), transparent 60%),
+  linear-gradient(135deg, rgba(47,111,176,.24), rgba(107,79,63,.10));
+mix-blend-mode: multiply;
+}
+.aim-card__art::before{
+content:""; position:absolute; inset:0; pointer-events:none;
+background:
+  linear-gradient(to bottom, rgba(255,255,255,.14), transparent 30%),
+  radial-gradient(100% 80% at 0% 100%, rgba(255,255,255,.10), transparent 60%);
+}
+
+/* Caption bar: strong contrast and readability */
+.aim-card__caption{
+position:absolute; left: clamp(.75rem, 1.8vw, 1rem); right: clamp(.75rem, 1.8vw, 1rem);
+bottom: clamp(.75rem, 1.8vw, 1rem);
+z-index:1;
+color:#fff; font-weight:900; line-height:1.3;
+background:
+  linear-gradient(180deg, rgba(15,30,50,.18), rgba(15,30,50,.18)),
+  color-mix(in srgb, var(--brand-blue) 22%, rgba(0,0,0,.34));
+border: 1px solid rgba(255,255,255,.22);
+backdrop-filter: blur(5px);
+padding: .55rem .7rem;
+border-radius: .7rem;
+box-shadow: 0 6px 18px rgba(0,0,0,.22);
+}
+
+/* Mobile: stack and disable expansion so it doesn't thrash layout */
+@media (max-width: 860px){
+.aims-row{ flex-direction:column; }
+.aims-row:hover .aim-card{ flex:1; transform:none; }
+.aim-card{ min-height: clamp(240px, 50vw, 420px); }
+}
+
+/* Safety: remove any legacy borders/padding from older card styles */
+.card--blue-inner, .card-frame{ border:0 !important; padding:0 !important; }
+
+
+/* ===== Aims: contained width, hover = blur+zoom image + full-text overlay (no blue tint) ===== */
+
+/* Keep the aims section inside a max width (breathing space at sides) */
+
+/* 3-up row */
+.aims-row{
+display:flex; align-items:stretch;
+gap: clamp(.6rem, 1.2vw, 1.1rem);
+}
+
+/* Base card */
+.aim-card{
+position:relative;
+flex: 1 1 0;                         /* equal thirds */
+min-height: clamp(260px, 28vw, 460px);
+border-radius: 1.1rem;
+overflow:hidden;
+background: #0f1420;                 /* neutral fallback (no brand blue) */
+box-shadow: 0 10px 26px rgba(0,0,0,.18);
+will-change: flex, transform;
+transition:
+  flex .85s cubic-bezier(.22,1,.36,1),
+  transform .85s cubic-bezier(.22,1,.36,1),
+  box-shadow .4s ease;
+}
+.aim-card:hover,
+.aim-card:focus-within{ box-shadow: 0 18px 38px rgba(0,0,0,.26); }
+
+/* Gentle expand on highlight; others shrink slightly */
+.aims-row:hover .aim-card{ flex: .95; transform: scale(.985); }
+.aims-row:hover .aim-card:hover,
+.aims-row .aim-card:focus-within{
+flex: 1.35;
+transform: scale(1.01);
+z-index: 1;
+}
+
+/* Image fills the card and behaves like a background */
+.aim-card__art,
+.aim-card__art img{
+position:absolute; inset:0;
+width:100%; height:100%;
+}
+.aim-card__art img{
+object-fit: cover; object-position: 50% 50%;
+display:block;
+/* slight base zoom to feel "cropped" */
+transform: scale(1.06) translateY(0%);
+transition: transform .85s cubic-bezier(.22,1,.36,1), filter .6s ease;
+filter: saturate(.98) contrast(1.02) brightness(1.02);
+}
+
+/* Neutral scrim (no blue). Darkens on highlight for readability */
+.aim-card::after{
+content:""; position:absolute; inset:0; pointer-events:none;
+background:
+  linear-gradient(to bottom, rgba(0,0,0,.08), rgba(0,0,0,.12));
+transition: opacity .45s ease;
+opacity: .7; /* base opacity pairs with image; keeps text readable without showing blue */
+}
+.aims-row:hover .aim-card::after{ opacity: .75; }
+.aims-row:hover .aim-card:hover::after,
+.aim-card:focus-within::after{ opacity: .85; }
+
+/* On highlight: image blurs + zooms slightly and pans to reveal more */
+.aims-row:hover .aim-card:hover .aim-card__art img,
+.aim-card:focus-within .aim-card__art img{
+transform: scale(1.22) translateY(-2%);
+filter: blur(2.5px) saturate(.95) contrast(1.05);
+}
+.aims-row:hover .aim-card:not(:hover) .aim-card__art img{
+transform: scale(1.12) translateY(1%);
+}
+
+/* Small "AIM #" title (always visible) */
+.aim-card__eyebrow{
+position:absolute; top:.85rem; left:.85rem; z-index:2;
+font-size:.8rem; font-weight:900; letter-spacing:.06em; text-transform:uppercase;
+color:#fff;
+background: rgba(0,0,0,.36);
+border:1px solid rgba(255,255,255,.25);
+padding:.28rem .5rem; border-radius:.45rem;
+backdrop-filter: blur(4px);
+}
+
+/* Full sentence — fills the card on highlight */
+.aim-card__caption{
+position:absolute; inset: 0; z-index:2;
+display:flex; align-items:center; justify-content:center;
+padding: clamp(.9rem, 2.5vw, 1.2rem);
+text-align:center; color:#fff; font-weight:900;
+line-height:1.3; width:100%;
+/* start hidden */
+opacity:0; transform: translateY(6px) scale(.98);
+transition: opacity .35s ease, transform .55s cubic-bezier(.22,1,.36,1);
+/* allow wrapping but keep nice measure on large screens */
+max-width: none;
+}
+.aims-row:hover .aim-card:hover .aim-card__caption,
+.aim-card:focus-within .aim-card__caption{
+opacity:1; transform: translateY(0) scale(1);
+font-size: clamp(1rem, 1.8vw, 1.25rem);
+}
+
+/* Mobile: stack neatly; disable expansion so layout stays stable */
+@media (max-width: 860px){
+.aims-row{ flex-direction:column; }
+.aims-row:hover .aim-card{ flex: 1; transform:none; }
+.aim-card{ min-height: clamp(240px, 50vw, 420px); }
+.aim-card__caption{ opacity:1; transform:none; font-size:1rem; }
+}
+
+/* Safety: if older 'card' styles exist, neutralize their borders/padding */
+.card--blue-inner, .card-frame{ border:0 !important; padding:0 !important; }
+/* Aims width cap (choose one line for 90% OR 80%) */
+:root { --aims-max: 100vw; }   /* change to 80vw if you prefer */
+
+/* #aims .container { max-width: 90vw; }  /* or 90vw */
+
+/* --- Aims: center-crop by default; fade-in caption without resizing --- */
+
+/* Image should already fill & be cropped from center at rest */
+.aim-card__art img{
+object-fit: cover;
+object-position: 50% 50%;
+transform: scale(1.15); /* filled + lightly cropped before hover */
+transition: transform .85s cubic-bezier(.22,1,.36,1), filter .6s ease;
+}
+
+/* When another card is hovered, non-hovered crop a touch more (no pan) */
+.aims-row:hover .aim-card:not(:hover) .aim-card__art img{
+transform: scale(1.18);
+}
+
+/* Hovered card reveals a bit more + subtle blur (no vertical shift) */
+.aims-row:hover .aim-card:hover .aim-card__art img,
+.aim-card:focus-within .aim-card__art img{
+transform: scale(1.28);
+filter: blur(2px) saturate(.95) contrast(1.05);
+}
+
+/* Caption: fixed size, no scaling/translate — just fade in */
+.aim-card__caption{
+position:absolute; inset:0; z-index:2;
+display:flex; align-items:center; justify-content:center;
+padding: clamp(.9rem, 2.5vw, 1.2rem);
+text-align:center; color:#fff; font-weight:900; line-height:1.3;
+font-size: clamp(1rem, 1.5vw, 1.1rem); /* constant size */
+opacity: 0;                            /* hidden by default */
+transform: none;                       /* kill the translate/scale */
+transition: opacity .35s ease;         /* fade only */
+pointer-events: none;                  /* avoid hover flicker */
+}
+
+/* Show caption on highlight without changing size/position */
+.aims-row:hover .aim-card:hover .aim-card__caption,
+.aim-card:focus-within .aim-card__caption{
+opacity: 1;
+}
+
+/* --- Aims fixes: no bars at rest + stable caption width --- */
+
+/* Image is fully filled & center-cropped even before hover */
+.aim-card__art,
+.aim-card__art img { position:absolute; inset:0; width:100%; height:100%; }
+.aim-card__art img{
+object-fit: cover;
+object-position: 50% 50%;
+transform: scale(1.32);                  /* bigger base crop so no bars */
+transition: transform .85s cubic-bezier(.22,1,.36,1), filter .6s ease;
+}
+/* Non-hovered tiles keep the same fill (no subtle recrop) */
+.aims-row:hover .aim-card:not(:hover) .aim-card__art img{
+transform: scale(1.32);
+}
+/* Hovered tile zooms a bit more + blur (no pan/shift) */
+.aims-row:hover .aim-card:hover .aim-card__art img,
+.aim-card:focus-within .aim-card__art img{
+transform: scale(1.42);
+filter: blur(2px) saturate(.95) contrast(1.05);
+}
+
+/* Caption: fixed, centered block — no size change on hover */
+.aim-card__caption{
+position:absolute; inset:0; z-index:2;
+display:flex; align-items:center; justify-content:center;
+text-align:center; color:#fff; font-weight:900; line-height:1.3;
+/* keep the same line breaks regardless of tile growth */
+width: clamp(260px, 30vw, 460px);
+margin: 0 auto;
+padding: 0 1rem;
+font-size: 1.05rem;                     /* constant size */
+opacity: 0;                             /* fade only */
+transition: opacity .35s ease;
+pointer-events: none;                   /* avoid hover flicker */
+}
+.aims-row:hover .aim-card:hover .aim-card__caption,
+.aim-card:focus-within .aim-card__caption{
+opacity: 1;
+}
+
+/* --- AIMS: remove tinted overlays; text-only; blur image on hover --- */
+
+/* kill any gradients/scrims/pseudo overlays */
+.aim-card{ background: none !important; }
+.aim-card::before,
+.aim-card::after,
+.aim-card__art::before,
+.aim-card__art::after{
+content: none !important;
+background: none !important;
+}
+
+/* image always fills (center-crop) */
+.aim-card__art,
+.aim-card__art img{ position:absolute; inset:0; width:100%; height:100%; }
+.aim-card__art img{
+object-fit: cover; object-position: 50% 50%;
+transform: scale(1.30);                 /* enough base crop = no bars */
+transition: transform .85s cubic-bezier(.22,1,.36,1), filter .6s ease;
+filter: none;
+}
+/* hover = just blur + subtle zoom (no tint) */
+.aim-card:hover .aim-card__art img,
+.aim-card:focus-within .aim-card__art img{
+transform: scale(1.40);
+filter: blur(2.5px);
+}
+
+/* eyebrow = plain text (no tinted chip) */
+.aim-card__eyebrow{
+background: none !important;
+border: 0 !important;
+backdrop-filter: none !important;
+padding: 0 !important;
+color: #fff;
+text-shadow: none;
+}
+
+/* caption = plain text, fixed width, no reflow when card grows */
+.aim-card__caption{
+position:absolute; inset:0; z-index:2;
+display:flex; align-items:center; justify-content:center;
+text-align:center; color:#fff; font-weight:900; line-height:1.3;
+width: clamp(260px, 30vw, 460px);      /* stable measure */
+margin: 0 auto; padding: 0 1rem;
+
+background: none !important;           /* remove tinted box */
+border: 0 !important;
+backdrop-filter: none !important;
+box-shadow: none !important;
+
+opacity: 0; transition: opacity .25s ease;
+pointer-events: none;                  /* avoids hover flicker */
+}
+.aim-card:hover .aim-card__caption,
+.aim-card:focus-within .aim-card__caption{ opacity: 1; }
+
+
+
+/* ==== AIMS OVERRIDE: dim only on hover (expanded) ==== */
+
+/* kill all tinted overlays/scrims */
+#aims .aim-card::before,
+#aims .aim-card::after,
+#aims .aim-card__art::before,
+#aims .aim-card__art::after{
+content: none !important;
+background: none !important;
+backdrop-filter: none !important;
+border: 0 !important;
+}
+
+/* image always fills, center-cropped, full-bright at rest */
+#aims .aim-card__art,
+#aims .aim-card__art img{ position:absolute; inset:0; width:100%; height:100%; }
+
+#aims .aim-card__art img{
+object-fit: cover; object-position: 50% 50%;
+transform: scale(1.28) !important;      /* ensure no bars at rest */
+filter: none !important;                 /* 100% bright at rest */
+transition: transform .85s cubic-bezier(.22,1,.36,1), filter .3s ease;
+}
+
+/* stop non-hovered tiles from re-scaling due to earlier rules */
+#aims .aims-row:hover .aim-card:not(:hover) .aim-card__art img{
+transform: scale(1.28) !important;
+filter: none !important;
+}
+
+/* hovered/expanded tile: darken + slight zoom/blur so white text pops */
+#aims .aim-card:hover .aim-card__art img,
+#aims .aim-card:focus-within .aim-card__art img{
+transform: scale(1.38) !important;
+filter: brightness(.28) contrast(1.05) saturate(.95) blur(2px) !important;
+/* tweak brightness: .35 lighter  |  .22 darker */
+}
+
+/* caption: fixed width (no reflow), pure text, fade-in only */
+#aims .aim-card__caption{
+position:absolute; inset:0; z-index:2;
+display:flex; align-items:center; justify-content:center;
+width: clamp(260px, 30vw, 520px);  /* stable line breaks */
+margin: 0 auto; padding: 0 1rem;
+text-align:center; color:#fff; font-weight:900; line-height:1.3; font-size:1.05rem;
+opacity:0; transition: opacity .2s ease;
+background:none !important; border:0 !important; backdrop-filter:none !important; box-shadow:none !important;
+}
+#aims .aim-card:hover .aim-card__caption,
+#aims .aim-card:focus-within .aim-card__caption{ opacity:1; }
+
+.hero .blob { display: none !important; }
+
+/* ==== Global blurred blobs behind every page ==== */
+html, body { height: 100%; }
+body{
+position: relative;
+z-index: 0;
+background: transparent !important; /* override the old grey gradient */
+}
+
+/* Big fixed background that never gets clipped */
+body::before{
+content: "";
+position: fixed;
+inset: -50vh -50vw;      /* huge bleed so it won’t “end” near AIMs */
+z-index: -1;
+pointer-events: none;
+
+/* blobs + soft base gradient */
+background:
+  radial-gradient(44rem 44rem at -10% -18%,
+    color-mix(in oklab, var(--brand-blue) 40%, transparent) 0%, transparent 65%),
+  radial-gradient(40rem 40rem at 110% -8%,
+    color-mix(in oklab, var(--brand-brown) 28%, transparent) 0%, transparent 68%),
+  radial-gradient(52rem 48rem at 85% 120%,
+    color-mix(in oklab, var(--brand-blue) 22%, transparent) 0%, transparent 72%),
+  linear-gradient(to bottom, #fff 0%, var(--light-gray) 100%);
+
+filter: blur(42px) saturate(1.02);
+opacity: .95;
+}
+
+/* === GLOBAL BLUR BLOBS (darker, cross-browser) === */
+html, body { height: 100%; }
+body{
+position: relative;
+z-index: 0;
+background: transparent !important; /* replace earlier light gradient */
+}
+
+/* Big fixed backdrop that never gets clipped */
+body::before{
+content: "";
+position: fixed;
+inset: -60vh -60vw;             /* huge bleed so it never “ends” */
+z-index: -1;
+pointer-events: none;
+
+/* use rgba, not color-mix/oklab */
+background:
+  radial-gradient(70rem 60rem at -12% -18%, rgba(47,111,176,.45), transparent 65%),
+  radial-gradient(60rem 50rem at 112% -10%, rgba(107,79,63,.30), transparent 70%),
+  radial-gradient(80rem 70rem at 88% 118%, rgba(47,111,176,.22), transparent 75%),
+  linear-gradient(to bottom, #ffffff 0%, var(--light-gray) 100%);
+
+filter: blur(48px) saturate(1.02);
+opacity: 1;
+}
+
+/* keep the old hero-local blobs hidden so we only see this global bg */
+.hero .blob { display: none !important; }
+
+
+/* === AIMS HOVER: brand-blue tint + gentle zoom/blur === */
+#aims .aim-card{ position: relative; }  /* ensure stacking context */
+
+#aims .aim-card__art img{
+transform: scale(1.28);
+filter: none !important;  /* cancel any earlier brightness() dims */
+transition: transform .85s cubic-bezier(.22,1,.36,1), filter .3s ease;
+}
+
+#aims .aim-card:hover .aim-card__art img,
+#aims .aim-card:focus-within .aim-card__art img{
+transform: scale(1.38) !important;
+/* IMPORTANT: no brightness() — let the blue scrim do the darkening */
+filter: blur(1.6px) saturate(.96) contrast(1.04) !important;
+}
+
+/* Re-enable an overlay and tint it FIND-AS blue */
+#aims .aim-card::after{
+content: "" !important;               /* beats any content:none !important */
+position: absolute; inset: 0;
+z-index: 0;                           /* stay behind caption text */
+pointer-events: none;
+opacity: 0;
+transition: opacity .25s ease;
+
+/* blue tint + a touch of depth */
+background:
+  radial-gradient(120% 90% at 90% 0%, rgba(47,111,176,.32), transparent 60%),
+  linear-gradient(180deg, rgba(20,40,70,.80), rgba(20,40,70,.80)),
+  rgba(47,111,176,1) !important;
+mix-blend-mode: multiply;
+}
+
+#aims .aim-card:hover::after,
+#aims .aim-card:focus-within::after{
+opacity: 1 !important;
+}
+
+/* Make sure caption sits above the overlay */
+#aims .aim-card__caption{ z-index: 2; }
+
+
+
+/* Make the new big centered blobs show clearly */
+body::before{ display:none !important; }          /* turn off earlier pseudo BG */
+.hero .blob{ display:none !important; }           /* kill hero-local blobs */
+
+/* === Parallax background blobs (subtle blue + brown) === */
+:root{
+/* easy dials */
+--blob-blur: 100px;              /* more = softer */
+--blob-blue-rgb: 47,111,176;    /* brand blue */
+--blob-brown-rgb: 107,79,63;    /* brand brown */
+--blob-blue-a: .10;             /* opacity of blue blob */
+--blob-brown-a: .04;            /* opacity of brown blob */
+
+/* motion inputs (set by JS) */
+--mx: 0; /* -0.5..0.5 mouse X */
+--my: 0; /* -0.5..0.5 mouse Y */
+--scrollY: 0px;
+}
+
+/* hide the old hero-local blobs so we only see the global backdrop */
+.hero .blob{ display: none !important; }
+
+/* parallax container */
+.page-blobs{
+position: fixed;
+inset: -30vh -30vw;             /* big bleed so it never clips */
+z-index: -1;
+pointer-events: none;
+filter: blur(var(--blob-blur)) saturate(1.02);
+}
+
+/* Blue blob (top-left, drifts more) */
+.page-blobs::before,
+.page-blobs::after{
+content:"";
+position:absolute;
+width: 150vmax; height: 150vmax;
+border-radius: 50%;
+will-change: transform;
+}
+
+/* Blue */
+.page-blobs::before{
+top: -36vmax; left: -38vmax;
+background: radial-gradient(closest-side,
+  rgba(var(--blob-blue-rgb), var(--blob-blue-a)),
+  rgba(var(--blob-blue-rgb), 0) 70%);
+transform: translate3d(
+  calc(var(--mx) * 28px),
+  calc( (var(--my) * 28px) + (var(--scrollY) * -0.06) ),
+  0
+);
+}
+
+/* Brown */
+.page-blobs::after{
+bottom: -40vmax; right: -32vmax;
+background: radial-gradient(closest-side,
+  rgba(var(--blob-brown-rgb), var(--blob-brown-a)),
+  rgba(var(--blob-brown-rgb), 0) 72%);
+transform: translate3d(
+  calc(var(--mx) * -20px),
+  calc( (var(--my) * -20px) + (var(--scrollY) * -0.04) ),
+  0
+);
+}
+
+/* Respect reduced motion: freeze parallax */
+@media (prefers-reduced-motion: reduce){
+:root{ --mx: 0; --my: 0; --scrollY: 0px; }
+}
+
+/* AIMS heading spacing/alignment */
+/* AIMS heading: left-aligned, consistent spacing */
+#aims .section__heading{
+text-align: left;
+margin-bottom: 1.25rem;
+}
+#aims .section__heading .h2{
+margin: 0;
+letter-spacing: .01em;
+}
+#aims .section__heading .muted{
+margin-top: .35rem;
+color: var(--muted);
+max-width: 60ch;
+}
+
+/* Make container normal width again */
+#aims .section__heading{
+text-align: left;
+margin-bottom: 1.25rem;
+}
+#aims .section__heading .muted{
+margin-top:.35rem; max-width:60ch;
+}
+
+.nav__links .link-btn{
+color:#6b7280;           /* light gray */
+}
+.nav__links .link-btn:hover{
+background: var(--modal-blue); /* #EAF3FB light blue */
+color: var(--brand-brown);     /* brown highlight */
+transform: translateY(-1px);
+}
+
+/* Anchor buttons (like the hero "Connect with us") shouldn't underline */
+a.btn,
+a.btn-ghost,
+a.btn-ghost-anim {
+text-decoration: none;
+}
+a.btn:hover,
+a.btn:focus,
+a.btn:active {
+text-decoration: none; /* belt & suspenders */
+}
+
+
+/* Panel: outer has NO padding/border; inner handles padding.
+ This avoids padding/border being part of the animation "tail". */
+ .team-accordion .person .person__panel{
+  padding: 0;                /* moved to inner wrapper */
+  border: 0;                 /* moved to open state */
+  overflow: hidden;          /* ensures clean height animation */
+  box-sizing: border-box;
+}
+
+/* Inner padded wrapper (JS will create it if missing) */
+.person__content{
+  padding: .85rem 1rem 1rem; /* your original padding */
+}
+
+/* Kill margin-collapse surprises at the ends (removes the “last pixel” catch) */
+.person__content > :first-child{ margin-top: 0 }
+.person__content > :last-child{  margin-bottom: 0 }
+
+/* Blue header shows ONLY while open and not closing; appears instantly */
+.team-accordion .person[open]:not([data-closing]) summary{
+  background: var(--blue-solid);
+  color: #fff;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Role text when open (no delay) */
+.team-accordion .person[open]:not([data-closing]) .person__role{ color:#e8f0fb }
+
+/* Chevron when open (no delay) */
+.team-accordion .person[open]:not([data-closing]) summary::after{
+  transform: rotate(180deg);
+  color: #fff;
+  background: color-mix(in srgb, var(--brand-blue) 18%, #1d3557);
+}
+
+/* Make the blue flip INSTANT (no color/background transition while open/closing) */
+.team-accordion .person[open] summary,
+.team-accordion .person[data-closing] summary{
+  transition: none !important;
+}
+
+/* Show the divider only when actually open (and not closing) */
+.team-accordion .person[open]:not([data-closing]) .person__panel{
+  border-top: 1px solid var(--border);
+}
+
+/* Footer logos: fill the width and split evenly by how many tiles exist */
+.logo-grid{
+display: grid;
+gap: .9rem;
+/* Desktop: one row, N equal columns (N = number of tiles) */
+grid-auto-flow: column;
+grid-auto-columns: 1fr;
+align-items: center;
+}
+
+/* Tile stays centered inside its cell (you already have this, keeping for clarity) */
+.logo-tile{
+display:flex; align-items:center; justify-content:center; height:3.25rem;
+background:#fff; border:1px solid var(--border); border-radius:.85rem; box-shadow:0 1px 2px rgba(0,0,0,.06);
+}
+
+/* Logos scale nicely */
+.logo-tile img{ max-height: 2.25rem; object-fit:contain }
+
+/* On small screens: switch to a wrapping grid with sensible min widths */
+@media (max-width: 720px){
+.logo-grid{
+  grid-auto-flow: row; /* stop the single-row behavior */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  justify-content: center; /* centers the last row if there’s extra space */
+}
+}
+
+
+/* === Unified page gutters (put at END of file) === */
+:root{
+/* Responsive horizontal padding (“gutters”) for all containers */
+--gutter: clamp(16px, 4vw, 40px);
+}
+
+/* Use the unified gutters everywhere you already use .container */
+.container{
+padding-left: var(--gutter) !important;
+padding-right: var(--gutter) !important;
+}
+
+/* Nav should also respect the gutters */
+.nav .container{
+padding-left: var(--gutter) !important;
+padding-right: var(--gutter) !important;
+}
+
+/* --- Hero: align with AIMS + fix sizing --- */
+.hero{
+/* vertical breathing room, no full-bleed horizontal */
+padding: clamp(1rem, 3vw, 2rem) 0;
+}
+.hero__grid{
+align-items: center;              /* center image + copy on row */
+gap: clamp(1.25rem, 3vw, 2.5rem); /* comfortable gap that scales */
+}
+.hero__copy{
+max-width: 48ch;                  /* same readable measure as AIMS blurb */
+margin-inline: auto;              /* center on mobile */
+}
+@media (min-width: 1024px){
+.hero__copy{ margin-inline: 0; }  /* left align on desktop */
+}
+
+/* Image column: keep it tidy and not too tall */
+.hero__image{ display: grid; place-items: center; }
+.hero__frame{
+width: min(100%, 640px);          /* don't blow past a nice width */
+aspect-ratio: 4 / 3;              /* stable ratio */
+max-height: min(62vh, 520px);     /* never dominate the viewport */
+border-radius: 1.25rem;
+overflow: hidden;
+}
+.hero__frame img{
+width: 100%; height: 100%;
+object-fit: cover; object-position: center;
+}
+
+/* Tiny phones: guarantee some padding even in worst cases */
+@media (max-width: 380px){
+.container{
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+}
+
+
+/* === Wide screens: let layouts breathe (place at END) === */
+:root{
+/* Bigger global container and gutters on large displays */
+--container-max: 1400px;                   /* default desktop */
+--gutter: clamp(20px, 4vw, 72px);          /* wider max gutter */
+}
+
+/* Step up as screens get very large */
+@media (min-width: 1440px){
+:root{
+  --container-max: 1600px;
+  --gutter: clamp(24px, 4.5vw, 88px);
+}
+}
+@media (min-width: 1920px){
+:root{
+  --container-max: 1760px;
+  --gutter: clamp(28px, 5vw, 104px);
+}
+}
+
+/* Apply everywhere that uses .container (nav, hero, aims, footer) */
+.container{
+max-width: var(--container-max) !important;
+padding-left: var(--gutter) !important;
+padding-right: var(--gutter) !important;
+}
+
+/* Hero: scale up comfortably on wide screens */
+.hero{
+padding: clamp(1.25rem, 3vw, 3rem) 0;
+}
+.hero__grid{
+align-items: center;
+gap: clamp(1.25rem, 3vw, 3rem);
+}
+
+/* Give the hero copy a touch more room on big screens without going super wide */
+.hero__copy{
+max-width: clamp(46ch, 54ch, 60ch);
+}
+
+/* Let the hero image grow a bit more but stay balanced */
+.hero__frame{
+width: min(100%, clamp(560px, 46vw, 820px));
+aspect-ratio: 4 / 3;
+max-height: min(64vh, 640px);
+}
+
+/* Optional: allow the main heading to top out a bit larger on ultra-wide */
+.h1{
+font-size: clamp(2.25rem, 4vw, 3.5rem);
+}
+
+
+/* ===== Sites grid & cards ===== */
+.sites-section { padding-top: 1rem; }
+
+.sites-grid{
+display: grid;
+gap: clamp(.9rem, 1.6vw, 1.25rem);
+grid-template-columns: 1fr;
+}
+@media (min-width: 700px){
+.sites-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.site-card{
+background: #fff;
+border: 1px solid var(--border);
+border-radius: 1rem;
+box-shadow: 0 1px 2px rgba(0,0,0,.06);
+overflow: hidden;
+display: flex;
+flex-direction: column;
+align-items: center;
+transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.site-card:hover{
+transform: translateY(-2px);
+box-shadow: 0 10px 26px rgba(47,111,176,.12);
+border-color: #cfe4ff;
+}
+
+/* Clickable logo tile (white background, padded) */
+.site-logo-link{
+width: 100%;
+display: grid;
+place-items: center;
+background: #fff;
+border-bottom: 1px solid var(--border);
+padding: clamp(.7rem, 1.6vw, 1rem);
+text-decoration: none;
+}
+.site-logo{
+max-width: min(82%, 520px);
+max-height: clamp(42px, 8vh, 84px);
+object-fit: contain;
+display: block;
+}
+
+/* Building photo with stable aspect ratio */
+.site-photo{
+width: 100%;
+margin: 0;
+aspect-ratio: 16 / 9;          /* keeps a nice video-like crop */
+overflow: hidden;
+background: #f8fafc;           /* soft neutral behind image load */
+}
+.site-photo img{
+width: 100%; height: 100%;
+object-fit: cover; object-position: center;
+display: block;
+transform: translateZ(0);
+transition: transform .6s cubic-bezier(.22,1,.36,1);
+}
+.site-card:hover .site-photo img{
+transform: scale(1.03);
+}
+
+.site-name{
+margin: .75rem 0 1rem 0;
+text-align: center;
+font-weight: 800;
+letter-spacing: .01em;
+}
+
+/* Center the whole section and keep gutters consistent with the rest of the site */
+.sites-section .container, .sites-section{
+/* uses your existing .container styles; no extra rules needed */
+}
+
+/* For ultra-wide screens, allow slightly larger logos/photos without breaking balance */
+@media (min-width: 1600px){
+.site-logo{ max-height: 96px; }
+}
+
+/* ===== Sites: single-column, centered, tidy cards ===== */
+.sites-section { padding-top: 1rem; }
+
+/* Stack the cards vertically (one per row) */
+.sites-stack{
+display: flex;
+flex-direction: column;
+gap: clamp(.9rem, 1.6vw, 1.25rem);
+max-width: 920px;           /* keeps a comfy reading width */
+margin: 0 auto;             /* center the stack */
+}
+
+/* Card shell */
+.site-card{
+background: #fff;
+border: 1px solid var(--border);
+border-radius: 1rem;
+box-shadow: 0 1px 2px rgba(0,0,0,.06);
+overflow: hidden;
+display: flex;
+flex-direction: column;
+align-items: center;
+transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.site-card:hover{
+transform: translateY(-2px);
+box-shadow: 0 10px 26px rgba(47,111,176,.12);
+border-color: #cfe4ff;
+}
+
+/* Logo area: white tile with padding; logo links out */
+.site-logo-link{
+width: 100%;
+display: grid;
+place-items: center;
+background: #fff;
+border-bottom: 1px solid var(--border);
+padding: clamp(.75rem, 2vw, 1.1rem);
+text-decoration: none;
+}
+/* Uniform logo scaling without distortion */
+.site-logo{
+max-width: min(86%, 560px);
+max-height: clamp(44px, 7.5vh, 92px);
+object-fit: contain;
+display: block;
+}
+
+/* Building photo with stable aspect ratio */
+.site-photo{
+width: 100%;
+margin: 0;
+aspect-ratio: 16 / 9;
+background: #f8fafc;
+overflow: hidden;
+}
+.site-photo img{
+width: 100%; height: 100%;
+object-fit: cover; object-position: center;
+display: block;
+transform: translateZ(0);
+transition: transform .6s cubic-bezier(.22,1,.36,1);
+}
+.site-card:hover .site-photo img{ transform: scale(1.03); }
+
+.site-name{
+margin: .75rem 0 1rem 0;
+text-align: center;
+font-weight: 800;
+letter-spacing: .01em;
+}
+
+/* ===== Sites: logo-emphasis, side-by-side, fully clickable ===== */
+.sites-section { padding-top: 1rem; }
+
+.sites-stack{
+display: flex;
+flex-direction: column;
+gap: clamp(.9rem, 1.6vw, 1.25rem);
+max-width: 1100px;       /* slightly wider to let the side-by-side breathe */
+margin: 0 auto;
+}
+
+/* Clickable card wrapper (anchor) */
+.site-card{
+display: block;
+color: inherit;
+text-decoration: none;
+background: #fff;
+border: 1px solid var(--border);
+border-radius: 1rem;
+box-shadow: 0 1px 2px rgba(0,0,0,.06);
+overflow: hidden;
+transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.site-card:hover{
+transform: translateY(-2px);
+box-shadow: 0 10px 26px rgba(47,111,176,.12);
+border-color: #cfe4ff;
+}
+
+/* Side-by-side media area: LOGO (bigger weight) | BUILDING */
+.site-grid{
+display: grid;
+grid-template-columns: 7fr 5fr;    /* emphasize logo pane */
+align-items: stretch;
+}
+
+/* Logo pane: white tile, padded, centered */
+.site-logo-pane{
+background: #fff;
+display: grid;
+place-items: center;
+padding: clamp(1rem, 3vw, 2rem);
+border-right: 1px solid var(--border);
+}
+.site-logo{
+max-width: min(86%, 720px);
+max-height: clamp(72px, 14vh, 160px);  /* bigger than before → emphasis */
+object-fit: contain;
+display: block;
+filter: drop-shadow(0 2px 6px rgba(0,0,0,.06)); /* gentle pop on light logos */
+}
+
+/* Building image with a stable crop */
+.site-photo{
+margin: 0;
+background: #f8fafc;
+position: relative;
+overflow: hidden;
+min-height: 180px;
+}
+.site-photo::before{
+content:"";
+display:block;
+padding-top: 56.25%;              /* 16:9 placeholder if image slow to load */
+}
+.site-photo > img{
+position: absolute; inset: 0;
+width: 100%; height: 100%;
+object-fit: cover; object-position: center;
+transform: translateZ(0);
+transition: transform .6s cubic-bezier(.22,1,.36,1);
+}
+.site-card:hover .site-photo > img{ transform: scale(1.03); }
+
+/* Meta row (name + arrow), still part of the link */
+.site-meta{
+display: flex;
+align-items: center;
+justify-content: center;
+gap: .4rem;
+padding: .8rem 1rem 1rem;
+}
+.site-name{
+margin: 0;
+text-align: center;
+font-weight: 900;
+letter-spacing: .01em;
+}
+.site-arrow{
+font-size: 1.1rem;
+line-height: 1;
+opacity: .7;
+transition: transform .18s ease, opacity .18s ease;
+}
+.site-card:hover .site-arrow{
+transform: translate(.5px,-.5px);
+opacity: .95;
+}
+
+/* Mobile: stack vertically, logo on top then building */
+@media (max-width: 720px){
+.site-grid{
+  grid-template-columns: 1fr;
+}
+.site-logo-pane{ border-right: 0; border-bottom: 1px solid var(--border); }
+.site-photo::before{ padding-top: 62%; } /* a hair taller on phones */
+}
+
+/* Hide optional bottom meta row if still in DOM */
+.site-meta{ display: none !important; }
+
+/* Make Site 1 and Site 3 logo panes PURE white (great for non-transparent logos) */
+.sites-stack > .site-card:nth-of-type(1) .site-logo-pane,
+.sites-stack > .site-card:nth-of-type(3) .site-logo-pane{
+background: #ffffff !important;     /* hard white */
+border-right: none !important;      /* remove divider so no gray edge */
+box-shadow: none !important;        /* ensure no ambient tint */
+outline: 1px solid #ffffff;         /* guards against blending with bg blobs */
+}
+
+/* Also ensure the logo image itself has no drop-shadow (looks gray on white-boxed logos) */
+.sites-stack > .site-card:nth-of-type(1) .site-logo,
+.sites-stack > .site-card:nth-of-type(3) .site-logo{
+filter: none !important;
+}
+
+/* Slightly bump logo padding on 1 & 3 so the white-boxed artwork breathes */
+.sites-stack > .site-card:nth-of-type(1) .site-logo-pane,
+.sites-stack > .site-card:nth-of-type(3) .site-logo-pane{
+padding: clamp(1.25rem, 3.2vw, 2.25rem) !important;
+}
+
+/* Keep the building side clean against the pure-white logo pane */
+.sites-stack > .site-card:nth-of-type(1) .site-photo,
+.sites-stack > .site-card:nth-of-type(3) .site-photo{
+border-left: 1px solid var(--border);  /* reintroduce separation on the photo side */
+}
+
+/* (Existing) logo defaults — keep emphasis without gray tint */
+.site-logo{
+max-width: min(86%, 720px);
+max-height: clamp(72px, 14vh, 160px);
+object-fit: contain;
+display: block;
+/* remove default drop-shadow so whites stay pure */
+filter: none;
+}
+
+/* ===== Team roles: aligned, left, and neatly clamped ===== */
+
+/* Tweakable role column width */
+:root { --role-col-width: 260px; }
+@media (max-width: 900px){ :root { --role-col-width: 220px; } }
+@media (max-width: 520px){ :root { --role-col-width: 180px; } }
+
+/* Keep Name | Role | Chevron columns; align items nicely */
+.team-accordion .person summary{
+display: grid;
+grid-template-columns: 1fr minmax(140px, var(--role-col-width)) 2.25rem;
+align-items: center;                 /* chevron stays centered vertically */
+gap: .75rem;
+}
+
+/* Name: strong, left, single-line where possible (wrap on small screens) */
+.team-accordion .person .person__name{
+font-weight: 800;
+letter-spacing: .01em;
+min-width: 0;                        /* enables text truncation if needed */
+}
+
+/* Role: left-aligned, consistent column width, up to 2 lines (clamped) */
+.team-accordion .person .person__role{
+justify-self: stretch;               /* fill its column */
+text-align: left;                    /* <-- was centered */
+color: #64748b;
+font-weight: 700;
+line-height: 1.25;
+min-width: 0;
+
+display: -webkit-box;
+-webkit-line-clamp: 2;               /* clamp to 2 lines for tidy rows */
+-webkit-box-orient: vertical;
+overflow: hidden;
+}
+
+/* When open (blue banner), keep role readable and still left-aligned */
+.team-accordion .person[open] .person__role{
+color: #e8f0fb;
+text-align: left;
+}
+
+/* Optional: tighter row height on large screens (feels more aligned) */
+@media (min-width: 900px){
+.team-accordion .person summary{ padding-top: .85rem; padding-bottom: .85rem; }
+}
+
+/* ===== Team summary row: give Role more room & left align ===== */
+:root { --role-col-width: 320px; }                 /* was smaller; more width = less cut-off */
+@media (max-width: 900px){ :root { --role-col-width: 260px; } }
+@media (max-width: 520px){ :root { --role-col-width: 200px; } }
+
+.team-accordion .person summary{
+display: grid;
+grid-template-columns: 1fr minmax(140px, var(--role-col-width)) 2.25rem;
+align-items: center;
+gap: .9rem;                                      /* a touch more breathing room */
+padding-left: .9rem;                             /* nudge text a bit left visually */
+}
+
+.team-accordion .person .person__role{
+justify-self: stretch;
+text-align: left;                                /* left, not centered */
+color: #64748b;
+font-weight: 700;
+line-height: 1.25;
+min-width: 0;
+display: -webkit-box;
+-webkit-line-clamp: 3;                           /* allow 3 lines before ellipsis */
+-webkit-box-orient: vertical;
+overflow: hidden;
+}
+.team-accordion .person[open] .person__role{ color:#e8f0fb; }
+
+/* ===== Expanded panel layout: just profile photo + links ===== */
+.person__blurb{ display:none !important; }         /* hide bios (keep markup safe to remove later) */
+
+.person__panel .person__content{
+display: grid;
+grid-template-columns: auto 1fr;
+gap: 1rem;
+align-items: start;
+}
+@media (max-width: 560px){
+.person__panel .person__content{ grid-template-columns: 1fr; }
+}
+
+/* Profile photo */
+.profile-pic{
+width: 112px; height: 112px;
+border-radius: 9999px;
+object-fit: cover; object-position: center;
+border: 2px solid #dbe7f3; background:#fff;
+box-shadow: 0 2px 6px rgba(0,0,0,.06);
+}
+
+/* Links column (chips you already have) */
+.person__contacts{ margin-top: .2rem; }
+
+/* ===== Non-expandable rows (no photo + no links) ===== */
+.person--static{
+pointer-events: none;                            /* not clickable */
+}
+.person--static summary{
+cursor: default;
+}
+.person--static summary::after{                    /* hide chevron */
+content: "";
+width: 0; height: 0; background: none;
+}
+.person--static:not([open]) summary:hover{         /* no hover tint */
+background: transparent;
+}
+
+/* --- Team: summary text more left & less cramped --- */
+:root { --role-col-width: 360px; } /* more room for long titles */
+.team-accordion .person summary{
+padding-left: .6rem;            /* nudge left */
+gap: .6rem;                      /* slightly tighter gap */
+}
+.team-accordion .person .person__role{
+justify-self: start;             /* left-align role text */
+text-align: left;                /* was centered before */
+white-space: normal;             /* allow wrapping everywhere */
+}
+
+/* --- Profile photo: larger, rounded-square --- */
+:root { --profile-size: 124px; }
+@media (max-width: 520px){ :root { --profile-size: 104px; } }
+
+.profile-pic{
+width: var(--profile-size);
+height: var(--profile-size);
+object-fit: cover;
+object-position: center;
+border-radius: .8rem;            /* rounded square (not a circle) */
+background: #fff;                /* keeps logos/portraits crisp */
+border: 1px solid #dbe7f3;
+box-shadow: 0 4px 16px rgba(47,111,176,.10);
+}
+
+/* Ensure links sit on the right of the photo on wide screens */
+.person__content{
+display: grid;
+grid-template-columns: var(--profile-size) 1fr;
+align-items: center;
+gap: 1rem;
+}
+@media (max-width: 640px){
+.person__content{
+  grid-template-columns: 1fr;   /* stack on small screens */
+  justify-items: start;
+}
+}
+
+/* --- No dropdown for static rows (no content) --- */
+.person--static{ cursor: default; }
+.person--static summary{ padding-right: 1rem; }         /* no chevron space needed */
+.person--static summary::after{ content: ""; display: none !important; } /* hide arrow */
+.person--static:hover{ box-shadow: 0 1px 2px rgba(0,0,0,.06); border-color: var(--border); }
+.person--static summary:hover{ background: transparent; } /* no hover highlight */
+
+/* === Team: make profile image ~25% wide and perfectly square === */
+
+/* Panel layout: image ~25% | content the rest */
+.person__content{
+display: grid;
+grid-template-columns: minmax(140px, 25%) 1fr; /* 25% image column with sane floor */
+align-items: center;
+gap: 1rem;
+}
+
+/* Bigger, rounded-square image that fills its column */
+.profile-pic{
+width: 100%;              /* fill the 25% column */
+aspect-ratio: 1 / 1;      /* perfect square */
+object-fit: cover;
+object-position: center;
+border-radius: .9rem;     /* rounded-square */
+background: #fff;
+border: 1px solid #dbe7f3;
+box-shadow: 0 6px 18px rgba(47,111,176,.12);
+}
+
+/* On very wide screens, don’t let the image get comically huge */
+@media (min-width: 1440px){
+.person__content{
+  grid-template-columns: clamp(180px, 25%, 320px) 1fr;  /* cap at 320px */
+}
+}
+
+/* On narrow screens, stack (image first, links below) */
+@media (max-width: 640px){
+.person__content{
+  grid-template-columns: 1fr;
+  justify-items: start;
+}
+.profile-pic{ width: clamp(160px, 60vw, 280px); } /* nice big square on phones */
+}
+
+/* === Team: smaller, centered, rounded-square headshots === */
+
+/* Fixed photo column (smaller than 25%) + links on the right */
+.team-accordion .person .person__panel .person__content{
+display: grid;
+grid-template-columns: clamp(120px, 18vw, 180px) 1fr; /* ~120–180px */
+align-items: start;   /* top-align image & links */
+gap: 1rem;
+}
+
+/* Square image, centered crop, rounded-square corners */
+.team-accordion .person .person__panel .profile-pic{
+width: 100% !important;     /* fill the fixed column */
+aspect-ratio: 1 / 1;
+height: auto;
+object-fit: cover;
+object-position: 50% 50% !important;  /* center again (undo “top” rule) */
+border-radius: .9rem;
+background: #fff;
+border: 1px solid #dbe7f3;
+box-shadow: 0 6px 18px rgba(47,111,176,.12);
+}
+
+/* Phones: stack, keep a nice square size */
+@media (max-width: 640px){
+.team-accordion .person .person__panel .person__content{
+  grid-template-columns: 1fr;
+  justify-items: start;
+}
+.team-accordion .person .person__panel .profile-pic{
+  width: clamp(140px, 60vw, 240px) !important;
+}
+}
+
+/* === Team: headshots crop from TOP (keep existing sizes) === */
+.team-accordion .person .person__panel .profile-pic{
+object-position: 50% 0% !important;  /* top center */
+object-fit: cover;                    /* keep fill behavior */
+}
+
+
+/* === Footer logos: add left/right padding and keep logos crisp === */
+.logo-grid{
+gap: 1rem;                 /* space between tiles */
+padding-inline: .5rem;     /* tiny outer gutter so the row doesn’t kiss edges */
+}
+
+.logo-tile{
+padding: .5rem 1.1rem;     /* <-- horizontal padding inside each tile */
+background: #fff;          /* keep a clean white stage */
+}
+
+/* Keep logos comfortably smaller than the tile width */
+.logo-tile img{
+max-height: 2.1rem;        /* adjust if you want them taller/shorter */
+max-width: 92%;            /* create built-in side breathing room */
+width: auto;               /* keep natural aspect ratio */
+height: auto;
+object-fit: contain;
+}
+
+/* On small screens, give a bit more side padding so they don’t feel cramped */
+@media (max-width: 720px){
+.logo-tile{ padding: .55rem 1.25rem; }
+.logo-tile img{ max-width: 90%; }
+}
+
+/* === HERO TOP SPACING: tighten start of page === */
+/* Kill the big vertical padding the legacy hero grid added */
+.hero__grid{
+padding: clamp(.5rem, 1.5vw, 1.25rem) 0 !important;  /* was 4–6rem */
+}
+
+/* Keep the hero wrapper lean, too */
+.hero{
+padding-top: clamp(.25rem, 1vw, .75rem) !important;   /* slightly reduced */
+padding-bottom: clamp(1rem, 3vw, 2rem);               /* keep room below */
+}
+
+/* Optional: make the sticky nav a hair shorter so the whole block sits higher */
+.nav__inner{
+padding-top: .55rem !important;
+padding-bottom: .55rem !important; /* was .75rem */
+}
+
+/* Ensure the first section on the page never adds surprise gap */
+main > .section:first-of-type{
+padding-top: clamp(1rem, 2vw, 1.5rem) !important;
+}
+
+/* === Keep horizontal gutters; only adjust vertical spacing === */
+
+/* Hero: reduce top/bottom without touching left/right */
+.hero{
+padding-block-start: clamp(.5rem, 1.2vw, 1rem) !important;
+padding-block-end:   clamp(1rem, 3vw, 2rem)   !important;
+}
+
+/* Kill any extra vertical padding inside the hero grid only */
+.hero__grid{
+padding-block: 0 !important;  /* don’t touch padding-inline */
+}
+
+/* Add a little breathing room before the Aims section */
+section#aims{
+margin-top: clamp(.75rem, 2vw, 1.25rem) !important;
+}
+
+/* Safety: ensure gutters still apply everywhere */
+.container{
+padding-inline: var(--gutter) !important; /* preserves L/R padding */
+}
+
+/* === FINAL OVERRIDES: double gutters + a bit more gap before Aims === */
+:root{
+/* roughly 2× your current site-wide left/right padding */
+--gutter: clamp(32px, 8vw, 144px);
+}
+
+/* make sure containers actually use the bigger gutters */
+.container,
+.nav .container{
+padding-left: var(--gutter) !important;
+padding-right: var(--gutter) !important;
+}
+
+/* add a little extra vertical space before Aims */
+section#aims{
+margin-top: clamp(1rem, 3vw, 2rem) !important;
+}
+
+
+/* ===== HERO: crop top+bottom 20% (show middle 60%) + slightly smaller width ===== */
+:root{
+  /* Set your original media aspect ratio here (16/9, 4/3, etc.) */
+  --hero-ar: 4/3;      /* change to 16/9 if your source is widescreen */
+  --hero-crop: .80;    /* show 60% of the height (crop 20% top + 20% bottom) */
+}
+
+/* Frame gets a reduced aspect ratio to “cut off” top/bottom */
+.hero__frame{
+  width: min(100%, 420px) !important;             /* slightly smaller for crisper look */
+  aspect-ratio: calc(var(--hero-ar) * var(--hero-crop)) !important;
+  border-radius: 1.25rem !important;
+  overflow: hidden !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06) !important;
+}
+
+/* Media fills the cropped frame and centers (so crop is evenly top/bottom) */
+.hero__frame img,
+.hero__frame video{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;         /* fills the shorter frame = crops top+bottom */
+  object-position: 50% 50% !important;  /* crop evenly from top & bottom */
+  transform: none !important;
+  filter: none !important;
+}
+
+/* Neutralize any lingering inline styles from components */
+:where(.hero__frame img, .hero__frame video)[style]{
+  object-fit: cover !important;
+  object-position: 50% 50% !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* === AIMS: keep text CRISP on hover + make it a bit larger === */
+
+/* 1) Stop scaling the whole card on hover (scaling blurs text) */
+#aims .aims-row:hover .aim-card,
+#aims .aim-card:hover,
+#aims .aims-row .aim-card:focus-within{
+  transform: none !important;     /* flex-grow still animates; no blur */
+}
+
+/* 2) Caption text: larger, no filters/transforms/backdrop blur */
+#aims .aim-card__caption{
+  font-size: clamp(1.1rem, 1.9vw, 1.35rem) !important;  /* a bit bigger */
+  line-height: 1.25 !important;
+  font-weight: 900 !important;
+
+  /* kill any sources of fuzziness */
+  transform: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  text-shadow: none !important;
+
+  /* rendering hints */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  will-change: opacity;
+}
+
+/* 3) Eyebrow label stays sharp too */
+#aims .aim-card__eyebrow{
+  transform: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  text-shadow: none !important;
+}
+
+/* === Team accordion (mobile): stack NAME above ROLE, smaller sizes === */
+@media (max-width: 640px){
+  /* Stack content: [Name + Role] | [Chevron] */
+  .team-accordion .person summary{
+    display: grid !important;
+    grid-template-columns: 1fr 2rem !important;
+    grid-template-rows: auto auto;
+    align-items: start;
+    gap: .15rem .5rem;
+    padding: .7rem .85rem;
+  }
+
+  /* Chevron stays on the right, centered */
+  .team-accordion .person summary::after{
+    grid-column: 2; grid-row: 1 / span 2;
+    justify-self: center; align-self: center;
+  }
+
+  /* NAME: slightly smaller, nudged up, wraps up to 2 lines */
+  .team-accordion .person .person__name{
+    grid-column: 1; grid-row: 1;
+    font-size: clamp(.98rem, 3.6vw, 1.06rem);
+    line-height: 1.15;
+    margin: 0 0 .05rem 0;              /* tiny nudge up */
+    transform: translateY(-1px);       /* visual lift */
+    white-space: normal !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;             /* max 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  /* ROLE: directly under name, smaller & muted, up to 2 lines */
+  .team-accordion .person .person__role{
+    grid-column: 1; grid-row: 2;
+    font-size: clamp(.78rem, 3.2vw, .88rem);
+    line-height: 1.25;
+    color: #64748b;
+    margin: 0;
+    white-space: normal !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    hyphens: auto;
+    justify-self: start; text-align: left;
+  }
+}
+
+/* Keep open-state role readable (still stacked) */
+@media (max-width: 640px){
+  .team-accordion .person[open] .person__role{
+    -webkit-line-clamp: 3;
+    font-size: clamp(.8rem, 3.3vw, .92rem);
+    color: #e8f0fb;
+  }
+}
+
+
+/* ==== Mobile nav button + drawer (hidden on desktop) ==== */
+
+/* Hide hamburger by default (desktop) */
+.nav__toggle{ display:none; }
+
+/* Drawer base (will be shown on mobile when JS removes [hidden]) */
+.nav__inner{ position: relative; } /* anchor absolute drawer */
+.nav__panel{
+  position: absolute;
+  top: calc(100% + .5rem);
+  right: 0; left: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: .9rem;
+  box-shadow: 0 16px 38px rgba(0,0,0,.14);
+  padding: .5rem;
+  display: grid;
+  gap: .35rem;
+  z-index: 50;
+}
+.nav__panel a.link-btn{
+  width: 100%;
+  justify-content: start;
+  padding: .85rem 1rem;
+  border-radius: .7rem;
+  font-size: 1rem;
+  background: transparent;
+}
+.nav__panel a.link-btn:hover{ background:#f2f7ff; color: var(--brand-brown); }
+
+/* Mobile-only: show hamburger, hide desktop links, size targets */
+@media (max-width: 860px){
+  .nav__toggle{
+    display: grid;
+    place-items: center;
+    width: 40px; height: 40px;
+    margin-left: .25rem;
+    border: 1px solid var(--border);
+    border-radius: .6rem;
+    background: #fff;
+    color: #1f2937;
+    box-shadow: 0 6px 14px rgba(0,0,0,.06);
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .nav__toggle:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.10);
+    background: #f8fafc;
+  }
+  .nav__toggle:active{ transform: translateY(0); }
+  .nav__toggle svg{ width: 22px; height: 22px; }
+
+  /* hide desktop link row on mobile */
+  .nav__links{ display: none !important; }
+
+  /* simple fade/slide when panel is shown (no animation when [hidden]) */
+  .nav__panel{ opacity: 1; transform: translateY(0); transition: opacity .18s ease, transform .18s ease; }
+  .nav__panel[hidden]{ display: none !important; opacity: 0; transform: translateY(-6px); }
+}
+
+/* Desktop-only: ensure mobile UI is hidden */
+@media (min-width: 861px){
+  .nav__panel{ display: none !important; }
+  .nav__toggle{ display: none !important; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .nav__toggle, .nav__panel{ transition: none !important; }
+}
+
+/* Taller hero: more top/bottom padding + fill more of the screen */
+.hero{
+  padding-block: clamp(2rem, 10vh, 6rem); /* add vertical padding */
+}
+.hero__grid{
+  min-height: clamp(520px, 78svh, 960px); /* fill most of viewport */
+  align-items: center;                     /* vertically center content */
+}
+
+/* Optional: give the CTA a touch more breathing room */
+.hero__cta{ margin-top: clamp(1rem, 3vh, 2rem); }

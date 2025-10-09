@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>FIND AS — Focused Imaging for Aortic Stenosis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light only" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Small favicon (tabs) -->
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/logos/favicon-inset-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/logos/favicon-inset-32.png">
+  <!-- iOS home screen -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/logos/favicon-inset-180.png">
+  <!-- PWA / Android -->
+  <link rel="icon" type="image/png" sizes="192x192" href="./images/logos/favicon-inset-192.png">
+  <!-- Legacy/Windows -->
+  <link rel="icon" href="./images/logos/favicon-inset.ico">
+</head>
+<body>
+  <div class="page-blobs" aria-hidden="true"></div>
+  <!-- Sticky glass nav -->
+  <header id="nav" class="nav glass border-b">
+    <!-- inside <header id="nav" class="nav glass border-b"> -->
+    <nav class="container nav__inner">
+      <a class="nav__brand" href="./index.html" aria-label="Go to home">
+        <img class="nav__logo" src="./images/logos/favicon-inset-512.png" alt="" decoding="async" />
+        <div class="nav__name">
+          <div class="brand-title">FIND AS</div>
+          <div class="brand-subtitle">Focused Imaging for Aortic Stenosis</div>
+        </div>
+      </a>
+
+      <!-- mobile hamburger -->
+      <button class="nav__toggle" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- desktop links (single UL) -->
+      <ul class="nav__links">
+        <li><a class="link-btn" href="teams.html">Our Team</a></li>
+        <li><a class="link-btn" href="sites.html">Sites</a></li>
+        <li><a class="link-btn" href="https://tmed.cs.tufts.edu/tmed_v2.html" target="_blank" rel="noopener noreferrer">TMED</a></li>
+        <li><a class="link-btn" href="news.html">Updates</a></li>
+        <li><a class="link-btn" href="mailto:Lisa.Small@tuftsmedicine.org" data-nav="connect">Contact Us</a></li>
+      </ul>
+
+      <!-- mobile drawer -->
+      <div id="nav-drawer" class="nav__panel" hidden>
+        <a class="link-btn" href="teams.html">Our Team</a>
+        <a class="link-btn" href="sites.html">Sites</a>
+        <a class="link-btn" href="https://tmed.cs.tufts.edu/tmed_v2.html" target="_blank" rel="noopener noreferrer">TMED</a>
+        <a class="link-btn" href="news.html">Updates</a>
+        <a class="link-btn" href="mailto:Lisa.Small@tuftsmedicine.org">Contact Us</a>
+      </div>
+    </nav>
+
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero border-b">
+      <div class="blob blob--blue animate-float"></div>
+      <div class="blob blob--brown animate-float delay-1-2s"></div>
+
+      <div class="container hero__grid">
+        <div class="hero__copy animate-reveal">
+          <p class="pill">Clinical AI • Ultrasound • Screening</p>
+          <h1 class="h1">FIND AS</h1>
+          <p class="lead">
+            Focused Imaging as a novel diagnostic strategy for Aortic Stenosis.
+          </p>
+          <div class="hero__cta">
+            <button href="#aims" id="btn-explore" class="btn btn-primary">Explore Aims</button>
+            <a class="btn btn-ghost btn-ghost-anim" href="mailto:Lisa.Small@tuftsmedicine.org">Connect with us</a>
+          </div>
+        </div>
+
+        <div class="hero__image animate-reveal delay-012s">
+          <div class="hero__frame">
+            <img src="./images/handheld_echo_video.gif" alt="FIND AS hero" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="aims" class="section">
+      <div class="container">
+        <div class="section__heading">
+          <h2 class="h2">Project Aims</h2>
+          <p class="muted">What we’re building and how we’ll validate it.</p>
+        </div>
+        <div class="aims-row" id="aims-grid">
+          <!-- Aim 1 -->
+          <article class="aim-card">
+            <figure class="aim-card__art">
+              <img src="./images/handheld_image.jpg" alt="Aim 1" />
+            </figure>
+        
+            <!-- small title -->
+            <span class="aim-card__eyebrow">AIM 1</span>
+        
+            <!-- full sentence that fills the tile on hover -->
+            <div class="aim-card__caption">
+              Aim 1: Establish a platform for cardiac disease detection from handheld ultrasound probes.
+            </div>
+          </article>
+        
+          <!-- Aim 2 -->
+          <article class="aim-card">
+            <figure class="aim-card__art">
+              <img src="./images/dnn.png" alt="Aim 2" />
+            </figure>
+            <span class="aim-card__eyebrow">AIM 2</span>
+            <div class="aim-card__caption">
+              Aim 2: Optimize a severe AS classifier via innovations that overcome key issues with handheld imaging.
+            </div>
+          </article>
+        
+          <!-- Aim 3 -->
+          <article class="aim-card">
+            <figure class="aim-card__art">
+              <img src="./images/doctors_office.png" alt="Aim 3" />
+            </figure>
+            <span class="aim-card__eyebrow">AIM 3</span>
+            <div class="aim-card__caption">
+              Aim 3: Determine the feasibility of screening patients at risk for severe AS in primary care
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    
+
+    <!-- Footer -->
+    <footer class="footer border-t">
+      <div class="container">
+        <div class="footer__cta">
+          <a
+            class="btn btn-nih"
+            href="https://reporter.nih.gov/search/aThBYiHFmUmC3meeXR3qXw/project-details/11208162"
+            target="_blank" rel="noopener noreferrer"
+            aria-label="View NIH grant R01HL180937 details on NIH RePORTER"
+          >
+            Supported by NIH/ NHLBI <span class="grant">R01HL180937</span>
+            <svg class="ext" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/>
+            </svg>
+          </a>
+        </div>
+        <div class="logo-grid">
+          <a class="logo-tile" href="https://www.tufts.edu" aria-label="Tufts University" target="_blank" rel="noopener">
+            <img src="/images/tufts_u_logo.png" alt="Tufts University" />
+          </a>
+          <a class="logo-tile" href="https://www.tuftsmedicine.org/" aria-label="Tufts Medical Center" target="_blank" rel="noopener">
+            <img src="/images/Tufts MC Logo.png" alt="Tufts Medical Center" />
+          </a>
+          <a class="logo-tile" href="https://www.tuftsmedicine.org/research-clinical-trials/research-institutes-department-research/institute-clinical-research-health-policy-studies/research-centers/predictive-analytics-comparative-effectiveness-pace-center" aria-label="PACE" target="_blank" rel="noopener">
+            <img src="/images/PACE logo_written out.png" alt="PACE" />
+          </a>
+          <a class="logo-tile" href="https://www.tuftsctsi.org/" aria-label="Tufts CTSI" target="_blank" rel="noopener">
+            <img src="/images/TuftsCTSI-LogoHorizontalRGB.jpg" alt="Tufts CTSI" />
+          </a>
+        </div>
+        <div class="footer__copy">© <span id="year"></span> FIND AS • All rights reserved.</div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Contact Modal (small) -->
+  <div id="contact-modal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop"></div>
+    <div class="modal__panel modal__panel--sm" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+      <button id="contact-x" class="x-btn" aria-label="Close contact form">×</button>
+
+      <div class="modal__head">
+        <h3 id="contact-title" class="h2 modal-title">Contact the FIND-AS Team</h3>
+      </div>
+
+      <form id="contact-form" class="form" autocomplete="on" novalidate>
+        <!-- Honeypot (anti-bot) -->
+        <label class="sr-only" for="website">Website</label>
+        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" class="hp">
+
+        <div class="row">
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" required placeholder="Jane Doe" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="jane@university.edu" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="affiliation">Affiliation (optional)</label>
+          <input id="affiliation" name="affiliation" type="text" placeholder="Tufts / Clinic / Company" />
+        </div>
+
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required placeholder="How can we collaborate?"></textarea>
+        </div>
+
+        <div class="actions">
+          <button id="contact-submit" class="btn btn-primary" type="submit">Send message</button>
+          <div id="contact-status" class="status" role="status" aria-live="polite"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script defer src="main.js"></script>
+</body>
+</html>
+<script>
+
+// Single mobile-nav toggler (minimal & robust)
+(() => {
+  const header = document.getElementById("nav");
+  const btn    = document.querySelector(".nav__toggle");
+  const drawer = document.getElementById("nav-drawer");
+  if (!header || !btn || !drawer) return;
+
+  const setOpen = (open) => {
+    btn.setAttribute("aria-expanded", String(open));
+    drawer.hidden = !open; // keep a11y in sync
+  };
+
+  btn.addEventListener("click", () => {
+    const open = btn.getAttribute("aria-expanded") !== "true";
+    console.log("hmmmmmmmm")
+    setOpen(open);
+  });
+
+  drawer.addEventListener("click", (e) => {
+    console.log("hmmmmmmmm")
+    if (e.target.closest("a")) setOpen(false);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
+  });
+})();
+</script>

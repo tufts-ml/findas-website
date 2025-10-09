@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>FIND AS — Updates</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light only" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Small favicon (tabs) -->
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/logos/favicon-inset-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/logos/favicon-inset-32.png">
+  <!-- iOS home screen -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/logos/favicon-inset-180.png">
+  <!-- PWA / Android -->
+  <link rel="icon" type="image/png" sizes="192x192" href="./images/logos/favicon-inset-192.png">
+  <!-- Legacy/Windows -->
+  <link rel="icon" href="./images/logos/favicon-inset.ico">
+</head>
+<body>
+  <div class="page-blobs" aria-hidden="true"></div>
+  <!-- Sticky glass nav -->
+  <header id="nav" class="nav glass border-b">
+    <!-- inside <header id="nav" class="nav glass border-b"> -->
+    <nav class="container nav__inner">
+      <a class="nav__brand" href="./index.html" aria-label="Go to home">
+        <img class="nav__logo" src="./images/logos/favicon-inset-512.png" alt="" decoding="async" />
+        <div class="nav__name">
+          <div class="brand-title">FIND AS</div>
+          <div class="brand-subtitle">Focused Imaging for Aortic Stenosis</div>
+        </div>
+      </a>
+
+      <!-- mobile hamburger -->
+      <button class="nav__toggle" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- desktop links (single UL) -->
+      <ul class="nav__links">
+        <li><a class="link-btn" href="teams.html">Our Team</a></li>
+        <li><a class="link-btn" href="sites.html">Sites</a></li>
+        <li><a class="link-btn" href="https://tmed.cs.tufts.edu/tmed_v2.html" target="_blank" rel="noopener noreferrer">TMED</a></li>
+        <li><a class="link-btn" href="news.html">Updates</a></li>
+        <li><a class="link-btn" href="mailto:Lisa.Small@tuftsmedicine.org" data-nav="connect">Contact Us</a></li>
+      </ul>
+
+      <!-- mobile drawer -->
+      <div id="nav-drawer" class="nav__panel" hidden>
+        <a class="link-btn" href="teams.html">Our Team</a>
+        <a class="link-btn" href="sites.html">Sites</a>
+        <a class="link-btn" href="https://tmed.cs.tufts.edu/tmed_v2.html" target="_blank" rel="noopener noreferrer">TMED</a>
+        <a class="link-btn" href="news.html">Updates</a>
+        <a class="link-btn" href="mailto:Lisa.Small@tuftsmedicine.org">Contact Us</a>
+      </div>
+    </nav>
+
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section__heading">
+          <h1 class="h1">Updates</h1>
+          <p class="muted">News and progress from the FIND-AS project.</p>
+        </div>
+
+        <!-- ===== Blog-style update ===== -->
+        <div class="blog-section">
+          <h2 class="h2" style="margin:1.75rem 0 1rem">Latest Updates</h2>
+          <article class="card card--plain">
+            <div class="card__body">
+              <div class="muted" style="font-size:.9rem">Sep 12, 2025</div>
+              <h3 class="h3" style="margin:.25rem 0 .5rem">Welcome to FIND-AS Updates</h3>
+              <p><strong>Updates coming soon!</strong> Check back for milestones, publications, and site news.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- <div class="blog-list">
+          <!-- Empty state -->
+          <!-- <article class="card card--plain">
+            <div class="card__body">
+              <h3 class="h3" style="margin-bottom:.35rem">No updates yet</h3>
+              <p>Updates coming soon! Check back for milestones, publications, and site news.</p>
+            </div>
+          </article> -->
+
+          <!-- Example future post (copy + edit, or remove)
+          <article class="card card--plain">
+            <div class="card__body">
+              <div class="muted" style="font-size:.9rem">Mar 20, 2025</div>
+              <h3 class="h3" style="margin:.25rem 0 .5rem">Kickoff at Tufts Primary Care</h3>
+              <p>We began pilot scans with the handheld workflow and are refining acquisition guidance…</p>
+            </div>
+          </article>
+        </div> 
+        -->
+        <div class="blog-list">
+          <!-- ===== Publications ===== -->
+          <h2 class="h2" style="margin:.25rem 0 1rem">Publications</h2>
+        
+          <article class="card card--plain pub-card">
+            <div class="card__body">
+              <h3 class="h3" style="margin-bottom:.35rem">
+                <a class="title-link" href="https://arxiv.org/pdf/2108.00080" rel="noopener">A New Semi-supervised Learning Benchmark for Classifying View and Diagnosing Aortic Stenosis from Echocardiograms</a>
+              </h3>
+              <p class="muted" style="margin:.25rem 0 .6rem">
+                Z. Huang, G. Long, B. Wessler, M. C. Hughes. <em>Proceedings of MLHC</em>, 2021.
+              </p>
+        
+              <div class="chip-row">
+                <a
+                  class="chip"
+                  href="https://arxiv.org/pdf/2108.00080"
+                  download="Huang_2021_MLHC.pdf"
+                  aria-label="Download PDF"
+                  target="_blank" rel="noopener"
+                >PDF</a>
+                <a class="chip" href="https://arxiv.org/abs/2108.00080" target="_blank" rel="noopener">arXiv</a>
+                <a class="chip" href="https://proceedings.mlr.press/v149/huang21a.html" target="_blank" rel="noopener">PMLR</a>
+              </div>
+        
+              <div id="bibtex-1" class="pub-callout" hidden>
+                <pre>@inproceedings{huang2021tmed,
+          title={A New Semi-supervised Learning Benchmark for Classifying View and Diagnosing Aortic Stenosis from Echocardiograms},
+          author={Huang, Zhe and Long, Gary and Wessler, Benjamin and Hughes, Michael C.},
+          booktitle={Machine Learning for Healthcare},
+          year={2021}
+        }</pre>
+              </div>
+            </div>
+          </article>
+        
+          <!-- (Optional) Another sample publication -->
+          <article class="card card--plain pub-card">
+            <div class="card__body">
+              <h3 class="h3" style="margin-bottom:.35rem">
+                <a class="title-link" href="#" rel="noopener">TMED-2: A Dataset for Semi-Supervised Classification of Echocardiograms</a>
+              </h3>
+              <p class="muted" style="margin:.25rem 0 .6rem">
+                Z. Huang, G. Long, B. Wessler, M. C. Hughes. <em>DataPerf Workshop @ ICML</em>, 2022.
+              </p>
+              <div class="chip-row">
+                <a
+                  class="chip"
+                  href="https://tmed.cs.tufts.edu/papers/HuangEtAl_TMED2_DataPerf_2022.pdf"
+                  download="tmed2.pdf"
+                  aria-label="Download PDF"
+                  target="_blank" rel="noopener"
+                >PDF</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Machine learning-enabled screening for aortic stenosis with handheld ultrasound-->
+          <article class="card card--plain pub-card">
+            <div class="card__body">
+              <h3 class="h3" style="margin-bottom:.35rem">
+                <a class="title-link" href="#" rel="noopener">Machine learning-enabled screening for aortic stenosis with handheld ultrasound</a>
+              </h3>
+              <p class="muted" style="margin:.25rem 0 .6rem">
+                Karmiy S, Huang Z, Velury D, Mai E, Li J, Dehn MM, Balian DR, Ramsingh D, Martin J, Kantrowitz J, Patel AR, Hughes MC, Wessler BS., 2025.
+              </p>
+              <div class="chip-row">
+                <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/40395285/" target="_blank" rel="noopener">PubMed</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Detecting Heart Disease from Multi-View Ultrasound Images via Supervised Attention Multiple Instance Learning -->
+          <article class="card card--plain pub-card">
+            <div class="card__body">
+              <h3 class="h3" style="margin-bottom:.35rem">
+                <a class="title-link" href="#" rel="noopener">Detecting Heart Disease from Multi-View Ultrasound Images via Supervised Attention Multiple Instance Learning</a>
+              </h3>
+              <p class="muted" style="margin:.25rem 0 .6rem">
+                Z. Huang, B. Wessler, M. C. Hughes., 2023
+              </p>
+              <div class="chip-row">
+                <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/38463535/" target="_blank" rel="noopener">PubMed</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Automated Detection of Aortic Stenosis Using Machine Learning -->
+          <article class="card card--plain pub-card">
+            <div class="card__body">
+              <h3 class="h3" style="margin-bottom:.35rem">
+                <a class="title-link" href="#" rel="noopener">Automated Detection of Aortic Stenosis Using Machine Learning</a>
+              </h3>
+              <p class="muted" style="margin:.25rem 0 .6rem">Wessler BS, Huang Z, Long GM Jr, Pacifici S, Prashar N, Karmiy S, Sandler RA, Sokol JZ, Sokol DB, Dehn MM, Maslon L, Mai E, Patel AR, Hughes MC., 2023
+              </p>
+              <div class="chip-row">
+                <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/36641103/" target="_blank" rel="noopener">PubMed</a>
+              </div>
+            </div>
+          </article>
+        </div>
+        
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer border-t">
+      <div class="container">
+        <div class="footer__cta">
+          <a
+            class="btn btn-nih"
+            href="https://reporter.nih.gov/search/aThBYiHFmUmC3meeXR3qXw/project-details/11208162"
+            target="_blank" rel="noopener noreferrer"
+            aria-label="View NIH grant R01HL180937 details on NIH RePORTER"
+          >
+            Supported by NIH/ NHLBI <span class="grant">R01HL180937</span>
+            <svg class="ext" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/>
+            </svg>
+          </a>
+        </div>
+        <div class="logo-grid">
+          <a class="logo-tile" href="https://www.tufts.edu" aria-label="Tufts University" target="_blank" rel="noopener">
+            <img src="/images/tufts_u_logo.png" alt="Tufts University" />
+          </a>
+          <a class="logo-tile" href="https://www.tuftsmedicine.org/" aria-label="Tufts Medical Center" target="_blank" rel="noopener">
+            <img src="/images/Tufts MC Logo.png" alt="Tufts Medical Center" />
+          </a>
+          <a class="logo-tile" href="https://www.tuftsmedicine.org/research-clinical-trials/research-institutes-department-research/institute-clinical-research-health-policy-studies/research-centers/predictive-analytics-comparative-effectiveness-pace-center" aria-label="PACE" target="_blank" rel="noopener">
+            <img src="/images/PACE logo_written out.png" alt="PACE" />
+          </a>
+          <a class="logo-tile" href="https://www.tuftsctsi.org/" aria-label="Tufts CTSI" target="_blank" rel="noopener">
+            <img src="/images/TuftsCTSI-LogoHorizontalRGB.jpg" alt="Tufts CTSI" />
+          </a>
+        </div>
+        <div class="footer__copy">© <span id="year"></span> FIND AS • All rights reserved.</div>
+      </div>
+    </footer>
+  </main>
+
+  <script defer>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+<script>
+
+  // Single mobile-nav toggler (minimal & robust)
+  (() => {
+    const header = document.getElementById("nav");
+    const btn    = document.querySelector(".nav__toggle");
+    const drawer = document.getElementById("nav-drawer");
+    if (!header || !btn || !drawer) return;
+  
+    const setOpen = (open) => {
+      btn.setAttribute("aria-expanded", String(open));
+      drawer.hidden = !open; // keep a11y in sync
+    };
+  
+    btn.addEventListener("click", () => {
+      const open = btn.getAttribute("aria-expanded") !== "true";
+      console.log("hmmmmmmmm")
+      setOpen(open);
+    });
+  
+    drawer.addEventListener("click", (e) => {
+      console.log("hmmmmmmmm")
+      if (e.target.closest("a")) setOpen(false);
+    });
+  
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
+    });
+  })();
+</script>
+  

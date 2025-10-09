@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>FIND AS — Our Team</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light only" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Small favicon (tabs) -->
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/logos/favicon-inset-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/logos/favicon-inset-32.png">
+  <!-- iOS home screen -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/logos/favicon-inset-180.png">
+  <!-- PWA / Android -->
+  <link rel="icon" type="image/png" sizes="192x192" href="./images/logos/favicon-inset-192.png">
+  <!-- Legacy/Windows -->
+  <link rel="icon" href="./images/logos/favicon-inset.ico">
+</head>
+<body>
+  <div class="page-blobs" aria-hidden="true"></div>
+  <!-- Sticky glass nav -->
+  <header id="nav" class="nav glass border-b">
+    <!-- inside <header id="nav" class="nav glass border-b"> -->
+    <nav class="container nav__inner">
+      <a class="nav__brand" href="./index.html" aria-label="Go to home">
+        <img class="nav__logo" src="./images/logos/favicon-inset-512.png" alt="" decoding="async" />
+        <div class="nav__name">
+          <div class="brand-title">FIND AS</div>
+          <div class="brand-subtitle">Focused Imaging for Aortic Stenosis</div>
+        </div>
+      </a>
+
+      <!-- mobile hamburger -->
+      <button class="nav__toggle" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- desktop links (single UL) -->
+      <ul class="nav__links">
+        <li><a class="link-btn" href="teams.html">Our Team</a></li>
+        <li><a class="link-btn" href="sites.html">Sites</a></li>
+        <li><a class="link-btn" href="https://tmed.cs.tufts.edu/tmed_v2.html" target="_blank" rel="noopener noreferrer">TMED</a></li>
+        <li><a class="link-btn" href="news.html">Updates</a></li>
+        <li><a class="link-btn" href="mailto:Lisa.Small@tuftsmedicine.org" data-nav="connect">Contact Us</a></li>
+      </ul>
+
+      <!-- mobile drawer -->
+      <div id="nav-drawer" class="nav__panel" hidden>
+        <a class="link-btn" href="teams.html">Our Team</a>
+        <a class="link-btn" href="sites.html">Sites</a>
+        <a class="link-btn" href="https://tmed.cs.tufts.edu/tmed_v2.html" target="_blank" rel="noopener noreferrer">TMED</a>
+        <a class="link-btn" href="news.html">Updates</a>
+        <a class="link-btn" href="mailto:Lisa.Small@tuftsmedicine.org">Contact Us</a>
+      </div>
+    </nav>
+
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section__heading">
+          <h1 class="h1">Our Team</h1>
+          <p class="muted">The FIND-AS collaboration spans clinical research, statistics, and machine learning.</p>
+        </div>
+        
+        <!-- ALL DATA:
+        Benjamin Wessler, MD, MS, Program Director/Principal Investigator
+        Denise Daudelin, MPH - Co-Investigator
+        Veronique Recile, BS - Clinical Research Coordinator
+        David M. Kent, MD, MSc, Co-Investigator
+        Ludovic Trinquart, PhD, Co-Investigator
+        Benjamin Koethe, MPH , Statistician
+        Jacob Kantrowitz, MD, PhD, Primary Care Physician
+        Lisa Small, MS, Research Project Coordinator 
+        -->
+        <div class="card card--plain">
+          <div class="card__body">
+            <div class="table-wrap">
+              <div class="team-accordion">
+                <!-- Michael Hughes -->
+                <details class="person">
+                  <summary>
+                    <span class="person__name">Michael Hughes</span>
+                    <span class="person__role">PhD - Principal Investigator</span>
+                  </summary>
+                  <div class="person__panel">
+                    <div class="person__content">
+                      <img class="profile-pic" src="./images/profile_pictures/Mike_Headshot_201805.jpg" alt="Michael Hughes">
+                      <ul class="person__contacts">
+                        <li><a class="contact-chip" href="mailto:Michael.Hughes@tufts.edu">Email</a></li>
+                        <li><a class="contact-chip" href="https://www.michaelchughes.com/" target="_blank" rel="noopener">Website</a></li>
+                        <li><a class="contact-chip" href="https://scholar.google.com/citations?user=ugSmcnoAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+
+                <!-- Benjamin Wessler -->
+                <details class="person">
+                  <summary>
+                    <span class="person__name">Benjamin Wessler</span>
+                    <span class="person__role">MD, MS - Program Director/Principal Investigator</span>
+                  </summary>
+                  <div class="person__panel">
+                    <div class="person__content">
+                      <img class="profile-pic" src="./images/profile_pictures/wessler.avif" alt="Benjamin Wessler">
+                      <ul class="person__contacts">
+                        <li><a class="contact-chip" href="https://www.tuftsmedicine.org/doctor/benjamin-wessler" target="_blank" rel="noopener">Profile</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+
+                <!-- Lisa Small (no expand) -->
+                <details class="person person--static">
+                  <summary>
+                    <span class="person__name">Lisa Small</span>
+                    <span class="person__role">MS - Research Project Coordinator</span>
+                  </summary>
+                </details>                
+
+                <!-- Shane Williams -->
+                <details class="person">
+                  <summary>
+                    <span class="person__name">Shane Williams</span>
+                    <span class="person__role">BS - Research Assistant</span>
+                  </summary>
+                  <div class="person__panel">
+                    <div class="person__content">
+                      <img class="profile-pic" src="./images/profile_pictures/shane_profile.jpg" alt="Shane Williams">
+                      <ul class="person__contacts">
+                        <li><a class="contact-chip" href="mailto:shanewilliamsprofessional@gmail.com">Email</a></li>
+                        <li><a class="contact-chip" href="https://www.linkedin.com/in/shane-thomas-williams/" target="_blank" rel="noopener">LinkedIn</a></li>
+                        <li><a class="contact-chip" href="https://github.com/shanethomaswilliams" target="_blank" rel="noopener">GitHub</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+
+                <!-- Veronique Recile (no expand) -->
+                <details class="person person--static">
+                  <summary>
+                    <span class="person__name">Veronique Recile</span>
+                    <span class="person__role">BS - Clinical Research Coordinator</span>
+                  </summary>
+                </details>
+
+                <!-- Denise Daudelin -->
+                <details class="person">
+                  <summary>
+                    <span class="person__name">Denise Daudelin</span>
+                    <span class="person__role">MPH - Co-Investigator</span>
+                  </summary>
+                  <div class="person__panel">
+                    <div class="person__content">
+                      <img class="profile-pic" src="./images/profile_pictures/denise_daudelin.avif" alt="Denise Daudelin">
+                      <ul class="person__contacts">
+                        <li><a class="contact-chip" href="https://www.tuftsmedicine.org/doctor/denise-daudelin" target="_blank" rel="noopener">Profile</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+
+                <!-- Ludovic Trinquart -->
+                <details class="person">
+                  <summary>
+                    <span class="person__name">Ludovic Trinquart</span>
+                    <span class="person__role">PhD - Co-Investigator</span>
+                  </summary>
+                  <div class="person__panel">
+                    <div class="person__content">
+                      <img class="profile-pic" src="./images/profile_pictures/ludovic.avif" alt="Ludovic Trinquart">
+                      <ul class="person__contacts">
+                        <li><a class="contact-chip" href="https://www.tuftsmedicine.org/doctor/ludovic-trinquart" target="_blank" rel="noopener">Profile</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+
+                <!-- David Kent -->
+                <details class="person">
+                  <summary>
+                    <span class="person__name">David Kent</span>
+                    <span class="person__role">MD, MSc - Co-Investigator</span>
+                  </summary>
+                  <div class="person__panel">
+                    <div class="person__content">
+                      <img class="profile-pic" src="./images/profile_pictures/david_kent.avif" alt="David Kent">
+                      <ul class="person__contacts">
+                        <li><a class="contact-chip" href="https://www.tuftsmedicine.org/doctor/david-kent" target="_blank" rel="noopener">Profile</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+
+                <!-- Benjamin Koethe -->
+                <details class="person">
+                  <summary>
+                    <span class="person__name">Benjamin Koethe</span>
+                    <span class="person__role">MPH - Statistician</span>
+                  </summary>
+                  <div class="person__panel">
+                    <div class="person__content">
+                      <img class="profile-pic" src="./images/profile_pictures/benjamin_koethe.avif" alt="Benjamin Koethe">
+                      <ul class="person__contacts">
+                        <li><a class="contact-chip" href="https://www.tuftsmedicine.org/doctor/benjamin-koethe" target="_blank" rel="noopener">Profile</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+
+                <!-- Jacob Kantrowitz -->
+                <details class="person">
+                  <summary>
+                    <span class="person__name">Jacob Kantrowitz</span>
+                    <span class="person__role">MD, PhD - Primary Care Physician</span>
+                  </summary>
+                  <div class="person__panel">
+                    <div class="person__content">
+                      <img class="profile-pic" src="./images/profile_pictures/jacob_kantrowitz.avif" alt="Jacob Kantrowitz">
+                      <ul class="person__contacts">
+                        <li><a class="contact-chip" href="https://www.tuftsmedicine.org/doctor/jacob-kantrowitz" target="_blank" rel="noopener">Profile</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+
+              </div>              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer border-t">
+      <div class="container">
+        <div class="footer__cta">
+          <a
+            class="btn btn-nih"
+            href="https://reporter.nih.gov/search/aThBYiHFmUmC3meeXR3qXw/project-details/11208162"
+            target="_blank" rel="noopener noreferrer"
+            aria-label="View NIH grant R01HL180937 details on NIH RePORTER"
+          >
+            Supported by NIH/ NHLBI <span class="grant">R01HL180937</span>
+            <svg class="ext" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/>
+            </svg>
+          </a>
+        </div>
+        <div class="logo-grid">
+          <a class="logo-tile" href="https://www.tufts.edu" aria-label="Tufts University" target="_blank" rel="noopener">
+            <img src="/images/tufts_u_logo.png" alt="Tufts University" />
+          </a>
+          <a class="logo-tile" href="https://www.tuftsmedicine.org/" aria-label="Tufts Medical Center" target="_blank" rel="noopener">
+            <img src="/images/Tufts MC Logo.png" alt="Tufts Medical Center" />
+          </a>
+          <a class="logo-tile" href="https://www.tuftsmedicine.org/research-clinical-trials/research-institutes-department-research/institute-clinical-research-health-policy-studies/research-centers/predictive-analytics-comparative-effectiveness-pace-center" aria-label="PACE" target="_blank" rel="noopener">
+            <img src="/images/PACE logo_written out.png" alt="PACE" />
+          </a>
+          <a class="logo-tile" href="https://www.tuftsctsi.org/" aria-label="Tufts CTSI" target="_blank" rel="noopener">
+            <img src="/images/TuftsCTSI-LogoHorizontalRGB.jpg" alt="Tufts CTSI" />
+          </a>
+        </div>
+        <div class="footer__copy">© <span id="year"></span> FIND AS • All rights reserved.</div>
+      </div>
+    </footer>
+  </main>
+
+  <script defer>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+
+<script defer>
+  (() => {
+    const acc = document.querySelector('.team-accordion');
+    if (!acc) return;
+  
+    const OPEN_MS  = 300;
+    const CLOSE_MS = 240;
+    const EASE = 'cubic-bezier(.22,1,.36,1)';
+    const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  
+    // 1) Ensure each panel has a padded inner wrapper to keep padding out of the animation.
+    acc.querySelectorAll('.person__panel').forEach(panel => {
+      if (!panel.querySelector('.person__content')) {
+        const wrap = document.createElement('div');
+        wrap.className = 'person__content';
+        while (panel.firstChild) wrap.appendChild(panel.firstChild);
+        panel.appendChild(wrap);
+      }
+    });
+  
+    function cleanup(panel){
+      const inner = panel.querySelector('.person__content');
+      panel.style.height = '';
+      panel.style.transition = '';
+      panel.style.overflow = '';
+      if (inner){
+        inner.style.opacity = '';
+        inner.style.transform = '';
+        inner.style.transition = '';
+        inner.style.visibility = '';
+      }
+    }
+  
+    function measure(panel){
+      const inner = panel.querySelector('.person__content');
+      // Make sure we can read full height without showing yet
+      const prevVis = inner.style.visibility;
+      inner.style.visibility = 'hidden';
+      const h = inner.offsetHeight; // includes inner padding
+      inner.style.visibility = prevVis || '';
+      return h;
+    }
+  
+    function slideOpen(details){
+      const panel = details.querySelector('.person__panel');
+      const inner = panel.querySelector('.person__content');
+      if (!panel || !inner) return;
+  
+      details.removeAttribute('data-closing');
+      details.open = true;                         // blue header appears instantly
+  
+      if (REDUCED){ cleanup(panel); return; }
+  
+      const targetH = measure(panel);
+  
+      // Start collapsed + hidden content (no padding flicker)
+      panel.style.overflow = 'hidden';
+      panel.style.transition = 'none';
+      panel.style.height = '0px';
+      inner.style.visibility = 'hidden';
+      inner.style.opacity = '0';
+      inner.style.transform = 'translateY(-6px)';
+      panel.offsetHeight; // reflow
+  
+      // Animate height only; fade/slide the inner content
+      panel.style.transition = `height ${OPEN_MS}ms ${EASE}`;
+      inner.style.transition = `opacity ${OPEN_MS}ms ${EASE}, transform ${OPEN_MS}ms ${EASE}`;
+  
+      // Reveal content at the same tick we expand (no “padding first”)
+      inner.style.visibility = 'visible';
+      panel.style.height = targetH + 'px';
+      inner.style.opacity = '1';
+      inner.style.transform = 'translateY(0)';
+  
+      panel.addEventListener('transitionend', function onEnd(e){
+        if (e.target !== panel || e.propertyName !== 'height') return;
+        panel.removeEventListener('transitionend', onEnd);
+        cleanup(panel); // back to auto
+      });
+    }
+  
+    function slideClose(details){
+      const panel = details.querySelector('.person__panel');
+      const inner = panel.querySelector('.person__content');
+      if (!panel || !inner) return;
+  
+      // Remove blue immediately during close
+      details.setAttribute('data-closing','');
+  
+      if (REDUCED){
+        details.open = false;
+        details.removeAttribute('data-closing');
+        cleanup(panel);
+        return;
+      }
+  
+      const startH = panel.getBoundingClientRect().height;
+  
+      // Lock height and hide content immediately (no lingering “padding feel”)
+      panel.style.overflow = 'hidden';
+      panel.style.transition = 'none';
+      panel.style.height = startH + 'px';
+      inner.style.transition = 'none';
+      inner.style.opacity = '0';                 // instant hide
+      inner.style.transform = 'translateY(-6px)';
+      panel.offsetHeight; // reflow
+  
+      panel.style.transition = `height ${CLOSE_MS}ms ${EASE}`;
+      panel.style.height = '0px';
+  
+      panel.addEventListener('transitionend', function onEnd(e){
+        if (e.target !== panel || e.propertyName !== 'height') return;
+        panel.removeEventListener('transitionend', onEnd);
+        details.open = false;                    // commit closed
+        details.removeAttribute('data-closing');
+        cleanup(panel);
+      });
+    }
+  
+    function toggle(summary){
+      const details = summary.parentElement;
+      const willOpen = !details.open;
+  
+      // Close any other open item first (their blue disappears instantly)
+      acc.querySelectorAll('.person[open]').forEach(d => {
+        if (d !== details && !d.hasAttribute('data-closing')) slideClose(d);
+      });
+  
+      if (willOpen) slideOpen(details);
+      else          slideClose(details);
+    }
+  
+    // Intercept clicks/keyboard so we fully control the <details> state
+    acc.addEventListener('click', (e) => {
+      const summary = e.target.closest('.person > summary');
+      if (!summary) return;
+      e.preventDefault(); // stop native <details> toggle
+      toggle(summary);
+    });
+  
+    acc.addEventListener('keydown', (e) => {
+      const summary = e.target.closest('.person > summary');
+      if (!summary) return;
+      if (e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        toggle(summary);
+      }
+    });
+  })();
+  </script>
+  
+  <script defer>
+    (() => {
+      const acc = document.querySelector('.team-accordion');
+      if (!acc) return;
+    
+      // 1) Mark rows as expandable only if they have a profile photo OR at least one contact link
+      acc.querySelectorAll('.person').forEach(person => {
+        const panel = person.querySelector('.person__panel');
+        if (!panel) return;
+    
+        // look for a profile image and links
+        const hasPhoto = !!panel.querySelector('.profile-pic');
+        const hasLink  = !!panel.querySelector('.person__contacts a');
+        const expandable = hasPhoto || hasLink;
+    
+        if (!expandable){
+          person.classList.add('person--static');
+          person.removeAttribute('open');
+          person.setAttribute('aria-disabled','true');
+        } else {
+          person.removeAttribute('aria-disabled');
+          person.classList.remove('person--static');
+        }
+      });
+    
+      // 2) Intercept clicks/keys to prevent opening static rows
+      acc.addEventListener('click', (e) => {
+        const summary = e.target.closest('.person > summary');
+        if (!summary) return;
+        const person = summary.parentElement;
+        if (person.classList.contains('person--static')) {
+          e.preventDefault();
+          return;
+        }
+      });
+    
+      acc.addEventListener('keydown', (e) => {
+        const summary = e.target.closest('.person > summary');
+        if (!summary) return;
+        const person = summary.parentElement;
+        if ((e.key === 'Enter' || e.key === ' ') && person.classList.contains('person--static')) {
+          e.preventDefault();
+          return;
+        }
+      });
+    })();
+    </script>
+    
+    <script>
+
+      // Single mobile-nav toggler (minimal & robust)
+      (() => {
+        const header = document.getElementById("nav");
+        const btn    = document.querySelector(".nav__toggle");
+        const drawer = document.getElementById("nav-drawer");
+        if (!header || !btn || !drawer) return;
+      
+        const setOpen = (open) => {
+          btn.setAttribute("aria-expanded", String(open));
+          drawer.hidden = !open; // keep a11y in sync
+        };
+      
+        btn.addEventListener("click", () => {
+          const open = btn.getAttribute("aria-expanded") !== "true";
+          console.log("hmmmmmmmm")
+          setOpen(open);
+        });
+      
+        drawer.addEventListener("click", (e) => {
+          console.log("hmmmmmmmm")
+          if (e.target.closest("a")) setOpen(false);
+        });
+      
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") setOpen(false);
+        });
+      })();
+      </script>
+      

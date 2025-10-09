@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>FIND AS — Sites</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light only" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Small favicon (tabs) -->
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/logos/favicon-inset-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/logos/favicon-inset-32.png">
+  <!-- iOS home screen -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/logos/favicon-inset-180.png">
+  <!-- PWA / Android -->
+  <link rel="icon" type="image/png" sizes="192x192" href="./images/logos/favicon-inset-192.png">
+  <!-- Legacy/Windows -->
+  <link rel="icon" href="./images/logos/favicon-inset.ico">
+</head>
+<body>
+    <div class="page-blobs" aria-hidden="true"></div>
+  <!-- Sticky glass nav -->
+  <header id="nav" class="nav glass border-b">
+    <!-- inside <header id="nav" class="nav glass border-b"> -->
+    <nav class="container nav__inner">
+      <a class="nav__brand" href="./index.html" aria-label="Go to home">
+        <img class="nav__logo" src="./images/logos/favicon-inset-512.png" alt="" decoding="async" />
+        <div class="nav__name">
+          <div class="brand-title">FIND AS</div>
+          <div class="brand-subtitle">Focused Imaging for Aortic Stenosis</div>
+        </div>
+      </a>
+
+      <!-- mobile hamburger -->
+      <button class="nav__toggle" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- desktop links (single UL) -->
+      <ul class="nav__links">
+        <li><a class="link-btn" href="teams.html">Our Team</a></li>
+        <li><a class="link-btn" href="sites.html">Sites</a></li>
+        <li><a class="link-btn" href="https://tmed.cs.tufts.edu/tmed_v2.html" target="_blank" rel="noopener noreferrer">TMED</a></li>
+        <li><a class="link-btn" href="news.html">Updates</a></li>
+        <li><a class="link-btn" href="mailto:Lisa.Small@tuftsmedicine.org" data-nav="connect">Contact Us</a></li>
+      </ul>
+
+      <!-- mobile drawer -->
+      <div id="nav-drawer" class="nav__panel" hidden>
+        <a class="link-btn" href="teams.html">Our Team</a>
+        <a class="link-btn" href="sites.html">Sites</a>
+        <a class="link-btn" href="https://tmed.cs.tufts.edu/tmed_v2.html" target="_blank" rel="noopener noreferrer">TMED</a>
+        <a class="link-btn" href="news.html">Updates</a>
+        <a class="link-btn" href="mailto:Lisa.Small@tuftsmedicine.org">Contact Us</a>
+      </div>
+    </nav>
+
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container sites-section">
+        <div class="section__heading">
+          <h1 class="h1">Participating Sites</h1>
+          <p class="muted">Our clinical partners where FIND-AS data collection will take place.</p>
+        </div>
+      
+        <div class="sites-stack">
+      
+          <!-- Site 1 -->
+          <a class="site-card" href=" https://www.tuftsmedicine.org/get-care/our-locations/about-tufts-medical-center" target="_blank" rel="noopener" aria-label="Visit Site 1">
+            <div class="site-grid">
+              <div class="site-logo-pane">
+                <img class="site-logo" src="./images/sites_images/Tufts_Medical_Center_logo.jpg" alt="Tufts Medical Center logo" loading="lazy" decoding="async" />
+              </div>
+              <figure class="site-photo" aria-hidden="true">
+                <img src="./images/sites_images/Tufts Medical Center exterior.jpg" alt="" loading="lazy" decoding="async" />
+              </figure>
+            </div>
+          </a>
+
+          <!-- Site 2 -->
+          <a class="site-card" href="https://www.tuftsmedicine.org/get-care/our-locations/about-melrosewakefield-hospital" target="_blank" rel="noopener" aria-label="Visit Site 2">
+            <div class="site-grid">
+              <div class="site-logo-pane">
+                <img class="site-logo" src="./images/sites_images/TM_MWH_color_rgb.png" alt="MelroseWakefield Hospital logo" loading="lazy" decoding="async" />
+              </div>
+              <figure class="site-photo" aria-hidden="true">
+                <img src="./images/sites_images/melrosewakefiele_hospital.jpg.webp" alt="" loading="lazy" decoding="async" />
+              </figure>
+            </div>
+          </a>
+
+          <!-- Site 3 -->
+          <a class="site-card" href="https://www.southcoast.org/" target="_blank" rel="noopener" aria-label="Visit Site 3">
+            <div class="site-grid">
+              <div class="site-logo-pane">
+                <img class="site-logo" src="./images/sites_images/southcoast_health.png" alt="Southcoast Health logo" loading="lazy" decoding="async" />
+              </div>
+              <figure class="site-photo" aria-hidden="true">
+                <img src="./images/sites_images/Southcoast-Rosebrook-WarehamMA-Shell-MainPerspective.jpg" alt="" loading="lazy" decoding="async" />
+              </figure>
+            </div>
+          </a>
+
+      
+        </div>
+      </div>
+        
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer border-t">
+      <div class="container">
+        <div class="footer__cta">
+          <a
+            class="btn btn-nih"
+            href="https://reporter.nih.gov/search/aThBYiHFmUmC3meeXR3qXw/project-details/11208162"
+            target="_blank" rel="noopener noreferrer"
+            aria-label="View NIH grant R01HL180937 details on NIH RePORTER"
+          >
+            Supported by NIH/ NHLBI <span class="grant">R01HL180937</span>
+            <svg class="ext" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/>
+            </svg>
+          </a>
+        </div>
+        <div class="logo-grid">
+          <a class="logo-tile" href="https://www.tufts.edu" aria-label="Tufts University" target="_blank" rel="noopener">
+            <img src="/images/tufts_u_logo.png" alt="Tufts University" />
+          </a>
+          <a class="logo-tile" href="https://www.tuftsmedicine.org/" aria-label="Tufts Medical Center" target="_blank" rel="noopener">
+            <img src="/images/Tufts MC Logo.png" alt="Tufts Medical Center" />
+          </a>
+          <a class="logo-tile" href="https://www.tuftsmedicine.org/research-clinical-trials/research-institutes-department-research/institute-clinical-research-health-policy-studies/research-centers/predictive-analytics-comparative-effectiveness-pace-center" aria-label="PACE" target="_blank" rel="noopener">
+            <img src="/images/PACE logo_written out.png" alt="PACE" />
+          </a>
+          <a class="logo-tile" href="https://www.tuftsctsi.org/" aria-label="Tufts CTSI" target="_blank" rel="noopener">
+            <img src="/images/TuftsCTSI-LogoHorizontalRGB.jpg" alt="Tufts CTSI" />
+          </a>
+        </div>
+        <div class="footer__copy">© <span id="year"></span> FIND AS • All rights reserved.</div>
+      </div>
+    </footer>
+  </main>
+
+  <script defer>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+<script>
+
+  // Single mobile-nav toggler (minimal & robust)
+  (() => {
+    const header = document.getElementById("nav");
+    const btn    = document.querySelector(".nav__toggle");
+    const drawer = document.getElementById("nav-drawer");
+    if (!header || !btn || !drawer) return;
+  
+    const setOpen = (open) => {
+      btn.setAttribute("aria-expanded", String(open));
+      drawer.hidden = !open; // keep a11y in sync
+    };
+  
+    btn.addEventListener("click", () => {
+      const open = btn.getAttribute("aria-expanded") !== "true";
+      console.log("hmmmmmmmm")
+      setOpen(open);
+    });
+  
+    drawer.addEventListener("click", (e) => {
+      console.log("hmmmmmmmm")
+      if (e.target.closest("a")) setOpen(false);
+    });
+  
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
+    });
+  })();
+</script>
+  
